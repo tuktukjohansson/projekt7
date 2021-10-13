@@ -10,13 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projekt7">
         <activity
-            android:name=".MainActivity"
+            android:name=".CreateRUActivity"
             android:exported="true" />
         <activity
             android:name=".CreateBOActivity"
             android:exported="true" />
         <activity
-            android:name=".CreateRUActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
