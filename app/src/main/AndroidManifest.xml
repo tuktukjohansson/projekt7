@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projekt7">
         <activity
+            android:name=".ChooseUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginScreenActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
