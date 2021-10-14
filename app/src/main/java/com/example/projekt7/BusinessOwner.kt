@@ -1,5 +1,5 @@
 package com.example.projekt7
 
-class BusinessOwner (name: String, business : String, adressStreet: String, townZipCode: String, phone: Int,
-                    mail: String, password: String, x: Int, y:Int) {
+class BusinessOwner (var name: String, var business : String, var adressStreet: String, var townZipCode: String, var phone: Int,
+                    var mail: String, var password: String, var x: Int = 0, var y:Int = 0) {
 }
