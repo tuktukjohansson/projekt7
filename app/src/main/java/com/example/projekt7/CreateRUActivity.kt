@@ -1,11 +1,13 @@
 package com.example.projekt7
 
-import android.content.ContentValues.TAG
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class CreateRUActivity : AppCompatActivity() {
     lateinit var nameEditText: EditText
@@ -13,10 +15,13 @@ class CreateRUActivity : AppCompatActivity() {
     lateinit var userNameEditText: EditText
     lateinit var passwordEditText: EditText
     val TAG =  "!!!"
+    lateinit var auth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_ruactivity)
+
+        auth = Firebase.auth
 
 
         val createUserButton = findViewById<Button>(R.id.buttonCreateUser)
@@ -30,6 +35,8 @@ class CreateRUActivity : AppCompatActivity() {
             var mailString = mailEditText.getText().toString()
             var userNameString = userNameEditText.getText().toString()
             var passwordString = passwordEditText.getText().toString()
+
+            createUser()
 
         val newRegularUser = RegularUser(
             nameString, mailString,
