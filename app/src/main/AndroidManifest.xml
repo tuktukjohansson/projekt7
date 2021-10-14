@@ -15,6 +15,11 @@
         <activity
             android:name=".CreateBOActivity"
             android:exported="true" />
+            android:name=".ChooseUserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".LoginScreenActivity"
+            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true">
