@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_create_boactivity.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_create_ruactivity.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.13179347826086957" />
         <entry key="app/src/main/res/drawable/button_create.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/drawable/button_login.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/drawable/corner_shape_button.xml" value="0.2101851851851852" />
