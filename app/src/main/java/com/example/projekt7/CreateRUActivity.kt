@@ -36,7 +36,6 @@ class CreateRUActivity : AppCompatActivity() {
             var userNameString = userNameEditText.getText().toString()
             var passwordString = passwordEditText.getText().toString()
 
-            createUser()
 
         val newRegularUser = RegularUser(
             nameString, mailString,
@@ -51,9 +50,25 @@ class CreateRUActivity : AppCompatActivity() {
             Log.d(TAG,"New username: ${printNewUser.userName}")
             Log.d(TAG,"New user password: ${printNewUser.password}")
 
-
-
-
+            createUser(mailString,passwordString)
         }
     }
-}
+
+    fun createUser(mailString:String, passwordString:String){
+
+        if (mailString.isEmpty() || passwordString.isEmpty()) {
+            return
+        }
+
+        auth.createUserWithEmailAndPassword(mailString, passwordString)
+            .addOnCompleteListener  { task ->
+                if ( task.isSuccessful) {
+                    Log.d(TAG, "createUser: Success")
+                   // goToAddActivity()
+                } else {
+                    Log.d(TAG, "createUser: user not created ${task.exception}")
+                }
+            }
+    }
+    }
+
