@@ -15,13 +15,11 @@ class CreateRUActivity : AppCompatActivity() {
     lateinit var userNameEditText: EditText
     lateinit var passwordEditText: EditText
     val TAG =  "!!!"
-    lateinit var auth : FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_ruactivity)
 
-        auth = Firebase.auth
 
 
         val createUserButton = findViewById<Button>(R.id.buttonCreateUser)
@@ -50,25 +48,10 @@ class CreateRUActivity : AppCompatActivity() {
             Log.d(TAG,"New username: ${printNewUser.userName}")
             Log.d(TAG,"New user password: ${printNewUser.password}")
 
-            createUser(mailString,passwordString)
+            DataManager.createUser(mailString,passwordString)
         }
     }
 
-    fun createUser(mailString:String, passwordString:String){
 
-        if (mailString.isEmpty() || passwordString.isEmpty()) {
-            return
-        }
-
-        auth.createUserWithEmailAndPassword(mailString, passwordString)
-            .addOnCompleteListener  { task ->
-                if ( task.isSuccessful) {
-                    Log.d(TAG, "createUser: Success")
-                   // goToAddActivity()
-                } else {
-                    Log.d(TAG, "createUser: user not created ${task.exception}")
-                }
-            }
-    }
     }
 

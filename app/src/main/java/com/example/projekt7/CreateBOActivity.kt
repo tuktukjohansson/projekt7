@@ -58,6 +58,8 @@ class CreateBOActivity : AppCompatActivity() {
             Log.d(TAG, "New user name: ${printNewUser.phone}")
             Log.d(TAG, "New user mail: ${printNewUser.mail}")
             Log.d(TAG, "New user password: ${printNewUser.password}")
+
+            DataManager.createUser(mailString,passwordString)
         }
     }
 }
