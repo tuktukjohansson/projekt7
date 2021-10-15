@@ -13,16 +13,16 @@
             android:name=".CreateRUActivity"
             android:exported="true" />
         <activity
-            android:name=".CreateBOActivity"
+            android:name=".MainActivity"
             android:exported="true" />
         <activity
             android:name=".ChooseUserActivity"
             android:exported="false" />
         <activity
-            android:name=".LoginScreenActivity"
+            android:name=".CreateBOActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

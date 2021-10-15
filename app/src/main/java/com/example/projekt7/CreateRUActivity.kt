@@ -48,7 +48,10 @@ class CreateRUActivity : AppCompatActivity() {
             Log.d(TAG,"New username: ${printNewUser.userName}")
             Log.d(TAG,"New user password: ${printNewUser.password}")
 
+            var dataList = mutableListOf<String>(nameString,mailString,userNameString,passwordString)
+
             DataManager.createUser(mailString,passwordString)
+            DataManager.addRegularData(newRegularUser)
         }
     }
 

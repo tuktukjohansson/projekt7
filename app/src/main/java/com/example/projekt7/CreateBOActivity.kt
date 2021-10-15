@@ -37,7 +37,7 @@ class CreateBOActivity : AppCompatActivity() {
             var businessString = businessEditText.getText().toString()
             var passwordString = passwordEditText.getText().toString()
             var zipString = zipEditText.getText().toString()
-            var phoneString = phoneEditText.getText().toString().toInt()
+            var phoneString = phoneEditText.getText().toString()
             var mailString = mailEditText.getText().toString()
 
 
@@ -52,14 +52,17 @@ class CreateBOActivity : AppCompatActivity() {
                 DataManager.businessOwnerList[DataManager.businessOwnerList.lastIndex]
             Log.d(TAG, "${DataManager.businessOwnerList.lastIndex}")
             Log.d(TAG, "New user name: ${printNewUser.name}")
-            Log.d(TAG, "New user name: ${printNewUser.business}")
-            Log.d(TAG, "New user name: ${printNewUser.adressStreet}")
-            Log.d(TAG, "New user name: ${printNewUser.townZipCode}")
-            Log.d(TAG, "New user name: ${printNewUser.phone}")
+            Log.d(TAG, "New user business: ${printNewUser.business}")
+            Log.d(TAG, "New user street: ${printNewUser.adressStreet}")
+            Log.d(TAG, "New user zipcode: ${printNewUser.townZipCode}")
+            Log.d(TAG, "New user phone: ${printNewUser.phone}")
             Log.d(TAG, "New user mail: ${printNewUser.mail}")
             Log.d(TAG, "New user password: ${printNewUser.password}")
 
+            var dataList = mutableListOf(nameString,businessString,streetString, zipString,phoneString,mailString, passwordString)
+
             DataManager.createUser(mailString,passwordString)
+            DataManager.addBusinessData(newBusinessOwner)
         }
     }
 }
