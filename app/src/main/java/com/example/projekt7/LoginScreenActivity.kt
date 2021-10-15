@@ -14,7 +14,8 @@ class LoginScreenActivity : AppCompatActivity() {
         val buttonCreate = findViewById<Button>(R.id.buttonCreate)
 
         buttonLogin.setOnClickListener {
-            //Add function for next activity
+            val userProfile = Intent(this,RUProfileActivity::class.java)
+            startActivity(userProfile)
         }
 
         buttonCreate.setOnClickListener {

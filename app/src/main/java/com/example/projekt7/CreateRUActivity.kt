@@ -20,8 +20,6 @@ class CreateRUActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_ruactivity)
 
-
-
         val createUserButton = findViewById<Button>(R.id.buttonCreateUser)
         createUserButton.setOnClickListener(){
             nameEditText = findViewById(R.id.editTextName)

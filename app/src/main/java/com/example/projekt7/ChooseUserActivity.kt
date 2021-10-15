@@ -1,5 +1,6 @@
 package com.example.projekt7
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -17,7 +18,8 @@ class ChooseUserActivity : AppCompatActivity() {
         }
 
         regularUser.setOnClickListener {
-            //Add function for next activity
+            val ruCreate = Intent(this,CreateRUActivity::class.java)
+            startActivity(ruCreate)
         }
 
     }

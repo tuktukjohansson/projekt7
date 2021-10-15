@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <item
+        android:id="@+id/nav_home"
+        android:icon="@drawable/ic_home_icon"
+        android:title="Home"/>
+
+    <item
+        android:id="@+id/saved_spots"
+        android:icon="@drawable/ic_saved_spots"
+        android:title="Saved Spots"/>
+
+    <item
+        android:id="@+id/share_spots"
+        android:icon="@drawable/ic_share_spots"
+        android:title="Share Spots"/>
+
+    <item
+        android:id="@+id/explore"
+        android:icon="@drawable/ic_explore"
+        android:title="Explore"/>
+</menu>
