@@ -10,6 +10,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projekt7">
         <activity
+            android:name=".SplashScreenActivity"
+            android:theme="@style/SplashScreenTheme"
+            android:exported="true" />
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+
+                <category android:name="android.intent.category.LAUCHER" />
+            </intent-filter>
+        <activity
             android:name=".CreateRUActivity"
             android:exported="true" />
         <activity
@@ -20,10 +29,8 @@
             android:exported="false" />
         <activity
             android:name=".LoginScreenActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
-            android:exported="true">
+            android:exported="false" >
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
