@@ -1,10 +1,12 @@
 package com.example.projekt7
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
@@ -19,8 +21,6 @@ class CreateRUActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_ruactivity)
-
-
 
         val createUserButton = findViewById<Button>(R.id.buttonCreateUser)
         createUserButton.setOnClickListener(){
@@ -53,7 +53,9 @@ class CreateRUActivity : AppCompatActivity() {
             var dataList = mutableListOf<String>(nameString,mailString,userNameString,passwordString)
 
             DataManager.createUser(mailString,passwordString)
-            DataManager.addRegularData(newRegularUser)
+            val intent = Intent(this, LoginScreenActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(applicationContext,"Account created !", Toast.LENGTH_SHORT).show()
         }
     }
 
