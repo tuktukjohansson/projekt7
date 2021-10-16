@@ -33,6 +33,8 @@ class CreateRUActivity : AppCompatActivity() {
             var mailString = mailEditText.getText().toString()
             var userNameString = userNameEditText.getText().toString()
             var passwordString = passwordEditText.getText().toString()
+            Log.d(TAG,"login mail: $mailString")
+            Log.d(TAG, "login pass: $passwordString")
 
 
         val newRegularUser = RegularUser(

@@ -24,18 +24,22 @@ class LoginScreenActivity : AppCompatActivity() {
         var editTextEmail = findViewById<EditText>(R.id.editTextEmail)
         var editTextPassword = findViewById<EditText>(R.id.editTextPassword)
 
-        var emailString = editTextEmail.toString()
-        var passwordString = editTextPassword.toString()
+        var emailString = editTextEmail.getText().toString()
+        var passwordString = editTextPassword.getText().toString()
 
         buttonLogin.setOnClickListener {
-            auth.signInWithEmailAndPassword(emailString, passwordString)
+            Log.d(TAG,"login mail: $emailString")
+            Log.d(TAG, "login pass: $passwordString")
+            /*
+            auth.signInWithEmailAndPassword(emailString,passwordString)
                 .addOnCompleteListener  { task ->
                     if ( task.isSuccessful) {
                         Log.d(TAG, "loginUser: Success")
                     } else {
-                        Log.d(TAG, "loginUser: user not loged in ${task.exception}")
+                        Log.d(TAG, "loginUser: user not logged in ${task.exception}")
                     }
-                }        }
+                }*/
+        }
 
         buttonCreate.setOnClickListener {
             val intent = Intent(this,ChooseUserActivity::class.java)
