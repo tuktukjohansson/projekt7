@@ -18,9 +18,6 @@
             android:name=".CreateRUActivity"
             android:exported="true" />
         <activity
-            android:name=".MainActivity"
-            android:exported="true" />
-        <activity
             android:name=".ChooseUserActivity"
             android:exported="false" />
         <activity

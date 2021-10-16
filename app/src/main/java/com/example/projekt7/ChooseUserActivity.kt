@@ -18,7 +18,6 @@ class ChooseUserActivity : AppCompatActivity() {
             startActivity(intent)        }
 
         regularUser.setOnClickListener {
-          UserProfile2
             val ruCreate = Intent(this,CreateRUActivity::class.java)
             startActivity(ruCreate)
         }  
