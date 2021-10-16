@@ -3,12 +3,9 @@ package com.example.projekt7
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.appcompat.app.ActionBar
-import com.example.projekt7.databinding.ActivityLoginScreenBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginScreenActivity : AppCompatActivity() {
@@ -28,6 +25,11 @@ class LoginScreenActivity : AppCompatActivity() {
 
         val buttonLogin = findViewById<Button>(R.id.buttonLogin)
         val buttonCreate = findViewById<Button>(R.id.buttonCreate)
+        var editTextEmail = findViewById<EditText>(R.id.editTextEmail)
+        var editTextPassword = findViewById<EditText>(R.id.editTextPassword)
+
+        var emailString = editTextEmail.getText().toString()
+        var passwordString = editTextPassword.getText().toString()
 
         val firebaseUser = firebaseAuth.currentUser
 

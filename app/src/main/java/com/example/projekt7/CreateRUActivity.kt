@@ -33,6 +33,8 @@ class CreateRUActivity : AppCompatActivity() {
             var mailString = mailEditText.getText().toString()
             var userNameString = userNameEditText.getText().toString()
             var passwordString = passwordEditText.getText().toString()
+            Log.d(TAG,"login mail: $mailString")
+            Log.d(TAG, "login pass: $passwordString")
 
 
         val newRegularUser = RegularUser(
@@ -48,8 +50,9 @@ class CreateRUActivity : AppCompatActivity() {
             Log.d(TAG,"New username: ${printNewUser.userName}")
             Log.d(TAG,"New user password: ${printNewUser.password}")
 
-            DataManager.createUser(mailString,passwordString)
+            var dataList = mutableListOf<String>(nameString,mailString,userNameString,passwordString)
 
+            DataManager.createUser(mailString,passwordString)
             val intent = Intent(this, LoginScreenActivity::class.java)
             startActivity(intent)
             Toast.makeText(applicationContext,"Account created !", Toast.LENGTH_SHORT).show()

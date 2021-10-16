@@ -14,13 +14,13 @@ class ChooseUserActivity : AppCompatActivity() {
         val regularUser = findViewById<Button>(R.id.buttonRegularUser)
 
         businessOwner.setOnClickListener {
-            //Add function for next activity
-        }
+            val intent = Intent(this,CreateBOActivity::class.java)
+            startActivity(intent)        }
 
         regularUser.setOnClickListener {
+          UserProfile2
             val ruCreate = Intent(this,CreateRUActivity::class.java)
             startActivity(ruCreate)
-        }
-
+        }  
     }
 }
