@@ -35,8 +35,7 @@ class LoginScreenActivity : AppCompatActivity() {
 
         buttonLogin.setOnClickListener {
             loginUser()
-            /*val userProfile = Intent(this,RUProfileActivity::class.java)
-            startActivity(userProfile)*/
+
             }
 
         buttonCreate.setOnClickListener {
@@ -58,12 +57,17 @@ class LoginScreenActivity : AppCompatActivity() {
              if (task != null)
                  gotoActivity()
             }
-
     }
 
-    fun gotoActivity(){
-        val userProfile = Intent(this,RUProfileActivity::class.java)
-        startActivity(userProfile)
-    }
+    fun gotoActivity() {
+ //       if (DataManager.regularUserList != null) {
+            val userProfile = Intent(this, RUProfileActivity::class.java)
+            startActivity(userProfile)
+        }
+//        if (DataManager.businessOwnerList != null) {
+//            val ownerProfile = Intent(this,BOProfileActivity::class.java)
+//            startActivity(ownerProfile)
+//       }
+//    }
 
 }
