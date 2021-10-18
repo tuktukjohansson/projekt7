@@ -59,8 +59,6 @@ class CreateBOActivity : AppCompatActivity() {
             Log.d(TAG, "New user mail: ${printNewUser.mail}")
             Log.d(TAG, "New user password: ${printNewUser.password}")
 
-            var dataList = mutableListOf(nameString,businessString,streetString, zipString,phoneString,mailString, passwordString)
-
             DataManager.createUser(mailString,passwordString)
             DataManager.addBusinessData(newBusinessOwner)
         }
