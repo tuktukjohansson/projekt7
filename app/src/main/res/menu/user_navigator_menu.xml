@@ -3,6 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:showIn="navigation_view">
 
+    <group android:checkableBehavior="single">
+
     <item
         android:id="@+id/nav_home"
         android:icon="@drawable/ic_home_icon"
@@ -22,4 +24,7 @@
         android:id="@+id/explore"
         android:icon="@drawable/ic_explore"
         android:title="Explore"/>
+
+    </group>
+
 </menu>
