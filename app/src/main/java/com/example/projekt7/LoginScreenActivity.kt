@@ -60,14 +60,7 @@ class LoginScreenActivity : AppCompatActivity() {
     }
 
     fun gotoActivity() {
- //       if (DataManager.regularUserList != null) {
             val userProfile = Intent(this, RUProfileActivity::class.java)
             startActivity(userProfile)
         }
-//        if (DataManager.businessOwnerList != null) {
-//            val ownerProfile = Intent(this,BOProfileActivity::class.java)
-//            startActivity(ownerProfile)
-//       }
-//    }
-
 }
