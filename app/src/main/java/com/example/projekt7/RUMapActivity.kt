@@ -44,8 +44,8 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val adapter = PlacesInfoAdapter(this)
         mMap.setInfoWindowAdapter(adapter)
 
-       // createMarkers()
-        createPlaces()
+        createMarkers()
+        // createPlaces()
     }
 
     fun createMarkers() {
@@ -81,6 +81,8 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     }
 
+    /*
+
     fun createPlaces() {
         val p1 = PlaceInfo("A.B.Café","Roger",
             LatLng (59.0,17.0), R.drawable.ic_baseline_stars_24
@@ -98,4 +100,6 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback {
             val mark = mMap.addMarker(MarkerOptions().position(place.position))
         }
     }
+
+     */
 }
