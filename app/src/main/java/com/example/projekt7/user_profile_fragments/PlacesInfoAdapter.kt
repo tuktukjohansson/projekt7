@@ -26,11 +26,6 @@ class PlacesInfoAdapter ( val context: Context) : GoogleMap.InfoWindowAdapter {
 
 
 
-        val place = marker.tag as PlaceInfo
-
-        titleView.text = place.name
-
-
         return infoWindow
     }
 
