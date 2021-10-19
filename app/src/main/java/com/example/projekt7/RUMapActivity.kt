@@ -3,13 +3,13 @@ package com.example.projekt7
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.projekt7.databinding.ActivityRumapBinding
+import com.example.projekt7.user_profile_fragments.PlaceInfo
 import com.example.projekt7.user_profile_fragments.PlacesInfoAdapter
 
 class RUMapActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -44,7 +44,8 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val adapter = PlacesInfoAdapter(this)
         mMap.setInfoWindowAdapter(adapter)
 
-        createMarkers()
+       // createMarkers()
+        createPlaces()
     }
 
     fun createMarkers() {
@@ -78,8 +79,23 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         marker3.tag = R.drawable.ic_baseline_stars_24
 
+    }
 
+    fun createPlaces() {
+        val p1 = PlaceInfo("A.B.Café","Roger",
+            LatLng (59.0,17.0), R.drawable.ic_baseline_stars_24
+        )
 
+        val p2 = PlaceInfo("ICA Supermarket","David",
+            LatLng (59.2968838,17.9830697), R.drawable.ic_baseline_stars_24
+        )
 
+        val placesList = listOf<PlaceInfo>(p1,p2)
+
+        // lista av platser
+
+        for (place in placesList) {
+            val mark = mMap.addMarker(MarkerOptions().position(place.position))
+        }
     }
 }

@@ -19,10 +19,17 @@ class PlacesInfoAdapter ( val context: Context) : GoogleMap.InfoWindowAdapter {
         val imageView = infoWindow.findViewById<ImageView>(R.id.image_star)
         val titleView = infoWindow.findViewById<TextView>(R.id.local_name)
         val userView = infoWindow.findViewById<TextView>(R.id.user_username)
-
+       /*
         titleView.text = marker.title
         userView.text = marker.snippet
         imageView.setImageResource(marker.tag as Int)
+
+        */
+
+        val place = marker.tag as PlaceInfo
+
+        titleView.text = place.name
+
 
         return infoWindow
     }
