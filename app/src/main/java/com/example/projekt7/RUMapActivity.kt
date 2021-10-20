@@ -2,6 +2,7 @@ package com.example.projekt7
 
 import android.Manifest
 import android.content.pm.PackageManager
+import android.location.Geocoder
 import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,6 +20,8 @@ import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.model.Marker
+import java.util.*
+
 
 class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
@@ -26,6 +29,8 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var binding: ActivityRumapBinding
+    var currentLocation: Location? = null
+    var currentMarker: Marker? = null
 
     companion object{
         private const val LOCATION_REQUEST_CODE = 1
@@ -43,7 +48,10 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
         mapFragment.getMapAsync(this)
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
+
+
     }
+
 
 
     override fun onMapReady(googleMap: GoogleMap) {
@@ -60,6 +68,28 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
         createMarkers()
 
+
+        val  latlong = LatLng(currentLocation?.latitude!!, currentLocation?.longitude!!)
+        drawMarker(latlong)
+
+        mMap.setOnMarkerDragListener(object : GoogleMap.OnMarkerDragListener {
+
+            override fun onMarkerDrag(p0: Marker?) {
+
+            }
+
+            override fun onMarkerDragEnd(p0: Marker?) {
+                if (currentMarker != null)
+                    currentMarker?.remove()
+
+                val newLatLng = LatLng(p0?.position!!.latitude, p0?.position.latitude)
+                drawMarker(newLatLng)
+            }
+
+            override  fun onMarkerDragStart(p0: Marker?) {
+
+            }
+        })
 
 
     }
@@ -149,6 +179,25 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     }
 
     override fun onMarkerClick(p0: Marker) = false
+
+
+    private fun drawMarker ( latlong: LatLng) {
+        val markerOption = MarkerOptions().position(latlong).title("I am here")
+            .snippet(getAddress(latlong.latitude, latlong.latitude)).draggable(true)
+
+        mMap.animateCamera(CameraUpdateFactory.newLatLng(latlong))
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latlong,15f))
+        currentMarker= mMap.addMarker(markerOption)
+        currentMarker?.showInfoWindow()
+
+    }
+
+    private fun getAddress(lat: Double, lon: Double): String? {
+        val geoCoder = Geocoder (this, Locale.getDefault())
+        val adresses = geoCoder.getFromLocation(lat,lon,1)
+        return adresses[0].getAddressLine(0).toString()
+
+    }
 
 
 
