@@ -24,8 +24,6 @@ class PlacesInfoAdapter ( val context: Context) : GoogleMap.InfoWindowAdapter {
         userView.text = marker.snippet
         imageView.setImageResource(marker.tag as Int)
 
-
-
         return infoWindow
     }
 
