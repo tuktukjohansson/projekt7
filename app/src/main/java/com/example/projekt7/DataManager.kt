@@ -15,7 +15,7 @@ object DataManager {
     var regularUserList = mutableListOf<RegularUser>()
     var businessOwnerList = mutableListOf<BusinessOwner>()
 
-    fun createUser(mailString:String, passwordString:String){
+    fun createRU(mailString:String, passwordString:String){
 
         if (mailString.isEmpty() || passwordString.isEmpty()) {
             return
@@ -25,7 +25,28 @@ object DataManager {
             .addOnCompleteListener  { task ->
                 if ( task.isSuccessful) {
                     Log.d(TAG, "createUser: Success")
-                    // goToAddActivity()
+                    auth.signInWithEmailAndPassword(mailString,passwordString)
+                    addRegularData(regularUserList[regularUserList.lastIndex])
+                    auth.signOut()
+                } else {
+                    Log.d(TAG, "createUser: user not created ${task.exception}")
+                }
+            }
+    }
+
+    fun createBO(mailString:String, passwordString:String){
+
+        if (mailString.isEmpty() || passwordString.isEmpty()) {
+            return
+        }
+
+        auth.createUserWithEmailAndPassword(mailString, passwordString)
+            .addOnCompleteListener  { task ->
+                if ( task.isSuccessful) {
+                    Log.d(TAG, "createUser: Success")
+                    auth.signInWithEmailAndPassword(mailString,passwordString)
+                    addBusinessData(businessOwnerList[businessOwnerList.lastIndex])
+                    auth.signOut()
                 } else {
                     Log.d(TAG, "createUser: user not created ${task.exception}")
                 }

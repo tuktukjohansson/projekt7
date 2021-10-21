@@ -50,12 +50,11 @@ class CreateRUActivity : AppCompatActivity() {
             Log.d(TAG,"New username: ${printNewUser.userName}")
             Log.d(TAG,"New user password: ${printNewUser.password}")
 
-            var dataList = mutableListOf<String>(nameString,mailString,userNameString,passwordString)
 
-            DataManager.createUser(mailString,passwordString)
+            DataManager.createRU(mailString,passwordString)
+            Toast.makeText(applicationContext,"Account created !", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, LoginScreenActivity::class.java)
             startActivity(intent)
-            Toast.makeText(applicationContext,"Account created !", Toast.LENGTH_SHORT).show()
         }
     }
 
