@@ -43,6 +43,9 @@
             android:name=".ChooseUserActivity"
             android:exported="false" />
         <activity
+            android:name=".CreateBOActivity"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="false" />
         <activity
