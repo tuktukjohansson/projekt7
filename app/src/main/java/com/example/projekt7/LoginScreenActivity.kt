@@ -60,7 +60,7 @@ class LoginScreenActivity : AppCompatActivity() {
     }
 
     fun gotoActivity() {
-            val userProfile = Intent(this, RUProfileActivity::class.java)
+            val userProfile = Intent(this, UserProfileActivity::class.java)
             startActivity(userProfile)
         }
 }
