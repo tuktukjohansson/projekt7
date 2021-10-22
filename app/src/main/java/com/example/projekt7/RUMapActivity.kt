@@ -12,10 +12,18 @@ import com.example.projekt7.databinding.ActivityRumapBinding
 import com.example.projekt7.user_profile_fragments.PlaceInfo
 import com.example.projekt7.user_profile_fragments.PlacesInfoAdapter
 
-class RUMapActivity : AppCompatActivity(), OnMapReadyCallback {
+class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityRumapBinding
+    private lateinit var lastlocation: Location
+    private lateinit var fusedLocationClient : FusedLocationProviderClient
+    
+    companion object {
+        
+        private const val LOCATION_REQUEST_CODE = 1
+    
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,26 +35,66 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this) 
     }
 
-    /**
-     * Manipulates the map once available.
-     * This callback is triggered when the map is ready to be used.
-     * This is where we can add markers or lines, add listeners or move the camera. In this case,
-     * we just add a marker near Sydney, Australia.
-     * If Google Play services is not installed on the device, the user will be prompted to install
-     * it inside the SupportMapFragment. This method will only be triggered once the user has
-     * installed Google Play services and returned to the app.
-     */
+    
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        
+        mMap.uiSettings.isZoomControlsEnabled = true 
 
         val adapter = PlacesInfoAdapter(this)
         mMap.setInfoWindowAdapter(adapter)
+        
+        mMap.setOnMarkerClickListener(this) 
 
+        setUpMap()
         createMarkers()
-        // createPlaces()
+        setMapLongClick(map)
+        
+        
     }
+    
+    fun setUpMap() {
+        
+        if (ActivityCompat.checkSelfPermisson(this, Manifest.permisson.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED 
+            && ActivityCompat.checkSelfPermission (this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSON_GRANTED) {
+            
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACESS_FINE_LOCATION), LOCATION_REQUEST_CODE)
+           
+            return 
+        }
+       
+        mMap.isMyLocationEnabled = true
+        fusedLocationClient.lastLocation.addOnSucessListener(this) {location -> 
+            
+            if (location != null) {
+                lastLocation = location 
+                val currentLatLong = LatLng(location.latitude, location.longitude)
+                placeMarkerOnMap(currentLatLong)
+                mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 12f))
+            
+            }
+        
+        
+        }
+    
+    
+    }
+    
+    private fun placeMarkerOnMap (currentLatLong: LatLng) {
+        
+        val markerOptions = MarkerOptions().position(currentLatLong)
+        markerOptions.title("$currentLatLong")
+        mMap.addMarker(markerOptions)
+    
+    }
+    
+    override fun onMarkerClick(p0:Marker?) = false 
+        
+    
 
     fun createMarkers() {
 
@@ -80,26 +128,25 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback {
         marker3.tag = R.drawable.ic_baseline_stars_24
 
     }
-
-    /*
-
-    fun createPlaces() {
-        val p1 = PlaceInfo("A.B.Café","Roger",
-            LatLng (59.0,17.0), R.drawable.ic_baseline_stars_24
-        )
-
-        val p2 = PlaceInfo("ICA Supermarket","David",
-            LatLng (59.2968838,17.9830697), R.drawable.ic_baseline_stars_24
-        )
-
-        val placesList = listOf<PlaceInfo>(p1,p2)
-
-        // lista av platser
-
-        for (place in placesList) {
-            val mark = mMap.addMarker(MarkerOptions().position(place.position))
+    
+    private fun setMapLongClick ( map: GoogleMap) {
+        map.setOnMapLongClickListener { latLng ->
+            val snippet = String.format(
+                Locate.getDefault(),
+                "Lat: %1$.5f, Long: %2$.5f",
+                latLng.latitude,
+                latLng.Longitude
+            )
+            map.addMarker(
+                MarkerOptions()
+                 .position(latLng)
+                 .title("Insert this place")
+                 .snippet("Click here")
+                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                 )
+        
         }
     }
 
-     */
+    
 }
