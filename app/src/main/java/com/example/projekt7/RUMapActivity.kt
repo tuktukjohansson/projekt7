@@ -1,22 +1,31 @@
 package com.example.projekt7
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.location.Location
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-
+import androidx.core.app.ActivityCompat
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.projekt7.databinding.ActivityRumapBinding
-import com.example.projekt7.user_profile_fragments.PlaceInfo
 import com.example.projekt7.user_profile_fragments.PlacesInfoAdapter
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.Marker
+import com.google.protobuf.DescriptorProtos
+import java.util.*
 
 class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityRumapBinding
-    private lateinit var lastlocation: Location
+    private lateinit var lastLocation: Location
     private lateinit var fusedLocationClient : FusedLocationProviderClient
     
     companion object {
@@ -36,7 +45,7 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
         
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this) 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
     
@@ -52,33 +61,33 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
 
         setUpMap()
         createMarkers()
-        setMapLongClick(map)
+        setMapLongClick(mMap)
         
         
     }
     
     fun setUpMap() {
         
-        if (ActivityCompat.checkSelfPermisson(this, Manifest.permisson.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED 
-            && ActivityCompat.checkSelfPermission (this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSON_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            && ActivityCompat.checkSelfPermission (this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             
-            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACESS_FINE_LOCATION), LOCATION_REQUEST_CODE)
+            ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), LOCATION_REQUEST_CODE)
            
             return 
         }
        
         mMap.isMyLocationEnabled = true
-        fusedLocationClient.lastLocation.addOnSucessListener(this) {location -> 
-            
+        fusedLocationClient.lastLocation.addOnSuccessListener(this) {location ->
+
             if (location != null) {
-                lastLocation = location 
+                lastLocation = location
                 val currentLatLong = LatLng(location.latitude, location.longitude)
                 placeMarkerOnMap(currentLatLong)
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(currentLatLong, 12f))
-            
+
             }
-        
-        
+
+
         }
     
     
@@ -92,7 +101,7 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     
     }
     
-    override fun onMarkerClick(p0:Marker?) = false 
+    override fun onMarkerClick(p0: Marker?) = false
         
     
 
@@ -132,10 +141,10 @@ class RUMapActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnMarke
     private fun setMapLongClick ( map: GoogleMap) {
         map.setOnMapLongClickListener { latLng ->
             val snippet = String.format(
-                Locate.getDefault(),
+                Locale.getDefault(),
                 "Lat: %1$.5f, Long: %2$.5f",
                 latLng.latitude,
-                latLng.Longitude
+                latLng.longitude
             )
             map.addMarker(
                 MarkerOptions()
