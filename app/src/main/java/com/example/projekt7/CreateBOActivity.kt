@@ -1,10 +1,12 @@
 package com.example.projekt7
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 
 class CreateBOActivity : AppCompatActivity() {
     lateinit var nameEditText: EditText
@@ -59,10 +61,11 @@ class CreateBOActivity : AppCompatActivity() {
             Log.d(TAG, "New user mail: ${printNewUser.mail}")
             Log.d(TAG, "New user password: ${printNewUser.password}")
 
-            var dataList = mutableListOf(nameString,businessString,streetString, zipString,phoneString,mailString, passwordString)
 
-            DataManager.createUser(mailString,passwordString)
-            DataManager.addBusinessData(newBusinessOwner)
+            DataManager.createBO(mailString,passwordString)
+            val intent = Intent(this, LoginScreenActivity::class.java)
+            startActivity(intent)
+            Toast.makeText(applicationContext,"Account created !", Toast.LENGTH_SHORT).show()
         }
     }
 }
