@@ -3,35 +3,27 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.29794871794871797" />
         <entry key="app/src/main/res/drawable/button_create.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/drawable/button_login.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/drawable/corner_shape_button.xml" value="0.2101851851851852" />
         <entry key="app/src/main/res/drawable/gradient_background.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/drawable/ic_login_password.xml" value="0.29794871794871797" />
         <entry key="app/src/main/res/drawable/ic_login_user.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/drawable/ic_saved_spots.xml" value="0.3026041666666667" />
+        <entry key="app/src/main/res/drawable/ic_share_spots.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/drawable/login_background.xml" value="0.3026041666666667" />
-        <entry key="app/src/main/res/layout/activity_boprofile.xml" value="0.271630947439354" />
+        <entry key="app/src/main/res/drawable/side_nav_bar.xml" value="0.3026041666666667" />
         <entry key="app/src/main/res/layout/activity_choose_user.xml" value="0.28598666796487016" />
-        <entry key="app/src/main/res/layout/activity_convert.xml" value="0.15670289855072464" />
-        <entry key="app/src/main/res/layout/activity_create_boactivity.xml" value="0.33441925686374135" />
-        <entry key="app/src/main/res/layout/activity_create_ruactivity.xml" value="0.3448845316867863" />
-        <entry key="app/src/main/res/layout/activity_login_regular_user.xml" value="0.3248509681974624" />
-        <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.29357031178811505" />
-        <entry key="app/src/main/res/layout/activity_login_user.xml" value="0.161231884057971" />
+        <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31955589923541156" />
-        <entry key="app/src/main/res/layout/activity_map.xml" value="0.2115036231884058" />
-        <entry key="app/src/main/res/layout/activity_regular_user_profile.xml" value="0.15670289855072464" />
-        <entry key="app/src/main/res/layout/activity_rumap.xml" value="0.2115036231884058" />
-        <entry key="app/src/main/res/layout/activity_ruprofile.xml" value="0.16417910447761194" />
-        <entry key="app/src/main/res/layout/content_map.xml" value="0.21965579710144928" />
-        <entry key="app/src/main/res/layout/fragment_friendlist.xml" value="0.2621814448218487" />
-        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.1393110435663627" />
-        <entry key="app/src/main/res/layout/fragment_offers.xml" value="0.161231884057971" />
-        <entry key="app/src/main/res/layout/fragment_saved_spots.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_savedspots.xml" value="0.161231884057971" />
-        <entry key="app/src/main/res/layout/fragment_shared_spots.xml" value="0.15670289855072464" />
-        <entry key="app/src/main/res/layout/info_window_ru.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/nav_header.xml" value="0.375" />
-        <entry key="app/src/main/res/menu/user_navigator_menu.xml" value="0.40668836710593775" />
+        <entry key="app/src/main/res/layout/activity_regular_user_profile.xml" value="0.1515625" />
+        <entry key="app/src/main/res/layout/activity_ruprofile.xml" value="0.2503725165755537" />
+        <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.34882016169269386" />
+        <entry key="app/src/main/res/layout/nav_header.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.28205128205128205" />
+        <entry key="app/src/main/res/menu/map.xml" value="0.1" />
+        <entry key="app/src/main/res/menu/user_navigator_menu.xml" value="0.28205128205128205" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3026041666666667" />
       </map>
     </option>
