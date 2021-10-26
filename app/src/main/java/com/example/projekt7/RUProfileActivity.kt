@@ -49,7 +49,7 @@ class RUProfileActivity : AppCompatActivity() {
         val buttonExplore = findViewById<Button>(R.id.btn_explore)
 
         buttonExplore.setOnClickListener {
-            val intent = Intent (this, RUMapActivity::class.java)
+            val intent = Intent (this, RUMapsActivity::class.java)
             startActivity(intent)
         }
 
