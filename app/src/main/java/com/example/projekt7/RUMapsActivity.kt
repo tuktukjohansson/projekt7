@@ -1,7 +1,11 @@
 package com.example.projekt7
 
+import android.Manifest
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -17,6 +21,8 @@ class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityRumapsBinding
+
+    private val REQUEST_LOCATION_PERMISSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +62,7 @@ class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         // functions
         setMapLongClick(mMap)
         setPoiClick(mMap)
+        enableMyLocation()
     }
 
     private fun setMapLongClick(map:GoogleMap) {
@@ -86,6 +93,37 @@ class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
             )
             poiMarker.showInfoWindow()
         }
+    }
+
+    private fun isPermissionGranted() : Boolean {
+        return ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+
+    }
+
+    private fun enableMyLocation() {
+        if (isPermissionGranted()) {
+            mMap.isMyLocationEnabled = true
+        }
+        else {
+            ActivityCompat.requestPermissions(
+                    this,
+                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                    REQUEST_LOCATION_PERMISSION
+            )
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+            requestCode: Int,
+            permissions: Array<out String>,
+            grantResults: IntArray) {
+            if (requestCode == REQUEST_LOCATION_PERMISSION) {
+                if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
+                    enableMyLocation()
+            }
+
     }
 
 }
