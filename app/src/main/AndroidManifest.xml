@@ -39,10 +39,7 @@
         <activity
             android:name=".UserProfileActivity"
             android:exported="false" />
-        <activity
-            android:name=".RUMapActivity"
-            android:exported="true"
-            android:label="@string/title_activity_rumap" />
+
         <activity
             android:name=".BOProfileActivity"
             android:exported="false" />
@@ -54,9 +51,6 @@
             android:exported="true" />
         <activity
             android:name=".ChooseUserActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CreateBOActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
