@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projekt7">
         <activity
-            android:name=".LoginScreenActivity"
+            android:name=".MainActivity"
             android:exported="false" />
         <activity
             android:name=".UserProfileActivity"
@@ -41,7 +41,7 @@
             android:exported="false"
             android:label="@string/title_activity_rumaps" />
         <activity
-            android:name=".UserProfileActivity"
+            android:name=".UploadImageActivity"
             android:exported="false" />
         <activity
             android:name=".BOProfileActivity"
@@ -56,10 +56,10 @@
             android:name=".ChooseUserActivity"
             android:exported="false" />
         <activity
-            android:name=".UploadImageActivity"
+            android:name=".SavePlaceActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginScreenActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
