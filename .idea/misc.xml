@@ -18,6 +18,7 @@
         <entry key="app/src/main/res/layout/activity_login_screen.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.31955589923541156" />
         <entry key="app/src/main/res/layout/activity_regular_user_profile.xml" value="0.1515625" />
+        <entry key="app/src/main/res/layout/activity_rumaps.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_ruprofile.xml" value="0.2503725165755537" />
         <entry key="app/src/main/res/layout/activity_upload_image.xml" value="0.2622940863803819" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.34882016169269386" />

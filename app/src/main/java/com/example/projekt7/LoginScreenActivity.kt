@@ -3,6 +3,7 @@ package com.example.projekt7
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -25,13 +26,9 @@ class LoginScreenActivity : AppCompatActivity() {
 
         val buttonLogin = findViewById<Button>(R.id.buttonLogin)
         val buttonCreate = findViewById<Button>(R.id.buttonCreate)
-        var editTextEmail = findViewById<EditText>(R.id.editTextEmail)
-        var editTextPassword = findViewById<EditText>(R.id.editTextPassword)
 
-        var emailString = editTextEmail.getText().toString()
-        var passwordString = editTextPassword.getText().toString()
 
-        val firebaseUser = firebaseAuth.currentUser
+
 
         buttonLogin.setOnClickListener {
             loginUser()
@@ -46,14 +43,15 @@ class LoginScreenActivity : AppCompatActivity() {
     }
 
     fun loginUser() {
-        val email = textEmail.text.toString()
-        val password = textPassword.text.toString()
+        var email = textEmail.text.toString()
+        var password = textPassword.text.toString()
         if(email.isEmpty() || password.isEmpty()){
             Toast.makeText(applicationContext,"Enter an email and password", Toast.LENGTH_SHORT).show()
             return
         }
         DataManager.auth.signInWithEmailAndPassword(email,password)
             .addOnSuccessListener { task ->
+                Log.d("!!!","$task")
              if (task != null)
                  gotoActivity()
             }

@@ -45,7 +45,7 @@ class UserProfileActivity : AppCompatActivity() {
     }
 
     private fun exploreActivity() {
-        val intent = Intent (this, RUMapActivity::class.java)
+        val intent = Intent (this, RUMapsActivity::class.java)
         startActivity(intent)
     }
 }
