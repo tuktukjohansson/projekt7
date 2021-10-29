@@ -1,9 +1,11 @@
 package com.example.projekt7
 
 import android.Manifest
+import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.PersistableBundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 
@@ -15,6 +17,8 @@ import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.projekt7.databinding.ActivityRumapsBinding
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.firebase.database.ktx.database
+import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -34,6 +38,7 @@ class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+
     }
 
     /**
@@ -63,35 +68,49 @@ class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         setMapLongClick(mMap)
         setPoiClick(mMap)
         enableMyLocation()
+
+
     }
 
     private fun setMapLongClick(map:GoogleMap) {
-        map.setOnMapLongClickListener { latLng ->
+        map.setOnMapLongClickListener {
             val snippet = String.format(
                     Locale.getDefault(),
                     "Lat: %1$.5f, Long:%2$.5f",
-                    latLng.latitude,
-                    latLng.longitude
+                    it.latitude,
+                    it.longitude
             )
             map.addMarker(
                     MarkerOptions()
-                            .position(latLng)
+                            .position(it)
                             .title("Insert this place")
                             .snippet("Click here")
 
             )
+
+            val database = Firebase.database("https://spoton-8bebd-default-rtdb.europe-west1.firebasedatabase.app/")
+            val reference = database.reference
+            val data = reference.push().child("location").setValue(it)
+
         }
+
+
+
     }
 
     private fun setPoiClick(map:GoogleMap) {
-        map.setOnPoiClickListener { poi ->
+        map.setOnPoiClickListener {
             val poiMarker = map.addMarker(
                     MarkerOptions()
-                            .position(poi.latLng)
-                            .title(poi.name)
+                            .position(it.latLng)
+                            .title(it.name)
                             .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
             )
             poiMarker.showInfoWindow()
+
+            val database = Firebase.database("https://spoton-8bebd-default-rtdb.europe-west1.firebasedatabase.app/")
+            val reference = database.reference
+            val data = reference.push().child("location").setValue(it)
         }
     }
 
