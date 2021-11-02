@@ -27,4 +27,6 @@
     <string name="invalid_password">Password must be >5 characters</string>
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_rumaps">RUMapsActivity</string>
+    <string name="title_activity_display_maps">DisplayMapsActivity</string>
+    <string name="title_activity_create_map">CreateMapActivity</string>
 </resources>
