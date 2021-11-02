@@ -25,6 +25,7 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.example.projekt7.databinding.ActivityCreateMapBinding
 import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.ktx.Firebase
 
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -110,8 +111,11 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             if (marker != null) {
                 markers.add(marker)
                 val place = Place(title,description,latLng.latitude,latLng.longitude)
+                DataManager.db.collection("places").add(place)
                 // Lägg till "Place"
                 // db.collection("places").add(place)
+
+
             }
 
             dialog.dismiss()
