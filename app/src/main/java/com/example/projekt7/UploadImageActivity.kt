@@ -13,12 +13,12 @@ import java.util.*
 
 class UploadImageActivity : AppCompatActivity() {
 
-//    lateinit var binding : ActivityUploadImageBinding
-//    lateinit var ImageUri : Uri
+      lateinit var binding : ActivityUploadImageBinding
+      lateinit var ImageUri : Uri
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-/*       binding = ActivityUploadImageBinding.inflate(layoutInflater)
+       binding = ActivityUploadImageBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
        binding.btnImageSelect.setOnClickListener {
@@ -30,9 +30,7 @@ class UploadImageActivity : AppCompatActivity() {
 
         }
 
- */
     }
-/*
     private fun uploadImage() {
 
         val progressDialog = ProgressDialog(this)
@@ -75,6 +73,4 @@ class UploadImageActivity : AppCompatActivity() {
 
         }
     }
-    */
- */
 }

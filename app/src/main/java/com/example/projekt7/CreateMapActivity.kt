@@ -42,6 +42,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityCreateMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = intent.getStringExtra(EXTRA_MAP_TITLE)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -69,7 +70,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 return true
             }
             val places = markers.map { marker -> Place(marker.title, marker.snippet, marker.position.latitude, marker.position.longitude) }
-            val userMap = UserMap(intent.getStringExtra(EXTRA_USER_MAP), places)
+            val userMap = UserMap(intent.getStringExtra(EXTRA_MAP_TITLE), places)
             val data = Intent()
             data.putExtra(EXTRA_USER_MAP, userMap)
             setResult(Activity.RESULT_OK, data)
