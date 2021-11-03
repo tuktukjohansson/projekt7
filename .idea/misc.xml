@@ -23,10 +23,11 @@
         <entry key="app/src/main/res/layout/activity_rumaps.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_ruprofile.xml" value="0.2503725165755537" />
         <entry key="app/src/main/res/layout/activity_save_place.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_splash.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_upload_image.xml" value="0.2622940863803819" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.34882016169269386" />
         <entry key="app/src/main/res/layout/dialog_create_map.xml" value="0.1393110435663627" />
-        <entry key="app/src/main/res/layout/dialog_create_place.xml" value="0.1393110435663627" />
+        <entry key="app/src/main/res/layout/dialog_create_place.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_saved_spots.xml" value="0.18568840579710144" />
         <entry key="app/src/main/res/layout/fragment_shared_spots.xml" value="0.2826780907920122" />
         <entry key="app/src/main/res/layout/info_window_ru.xml" value="0.1" />

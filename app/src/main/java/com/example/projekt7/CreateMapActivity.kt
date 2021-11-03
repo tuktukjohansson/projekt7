@@ -1,21 +1,22 @@
 package com.example.projekt7
 
 import android.app.Activity
+import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.projekt7.Model.Place
 import com.example.projekt7.Model.UserMap
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -25,21 +26,23 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.example.projekt7.databinding.ActivityCreateMapBinding
 import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import java.text.SimpleDateFormat
+import java.util.*
 
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
+    lateinit var ImageUri : Uri
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityCreateMapBinding
-
     private var markers : MutableList<Marker> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityCreateMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        supportActionBar?.title = intent.getStringExtra(EXTRA_MAP_TITLE)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -53,6 +56,8 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 
+    //val fbImage = findViewById<ImageView>(R.id.fbImage)
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_create_map, menu)
         return super.onCreateOptionsMenu(menu)
@@ -65,7 +70,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 return true
             }
             val places = markers.map { marker -> Place(marker.title, marker.snippet, marker.position.latitude, marker.position.longitude) }
-            val userMap = UserMap(intent.getStringExtra(EXTRA_USER_MAP), places)
+            val userMap = UserMap(intent.getStringExtra(EXTRA_MAP_TITLE), places)
             val data = Intent()
             data.putExtra(EXTRA_USER_MAP, userMap)
             setResult(Activity.RESULT_OK, data)
@@ -95,10 +100,14 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun showAlertDialog(latLng: LatLng) {
         val placeFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_place, null)
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Create a marker")
+            .setTitle("Save a spot")
             .setView(placeFormView)
+            .setNeutralButton("Select Image") {dialog, which ->
+                selectImage()
+            }
             .setNegativeButton("Cancel",null)
             .setPositiveButton("OK",null).show()
+
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
             val title = placeFormView.findViewById<EditText>(R.id.etTitle).text.toString()
@@ -110,16 +119,54 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             val marker = mMap.addMarker(MarkerOptions().position(latLng).title(title).snippet(description))
             if (marker != null) {
                 markers.add(marker)
+               // uploadImage()
                 val place = Place(title,description,latLng.latitude,latLng.longitude)
                 DataManager.db.collection("places").add(place)
-                // Lägg till "Place"
-                // db.collection("places").add(place)
-
 
             }
 
             dialog.dismiss()
         }
     }
+
+/*    private fun uploadImage() {
+        val progressDialog = ProgressDialog(this)
+        progressDialog.setMessage("Uploading File...")
+        progressDialog.setCancelable(false)
+        progressDialog.show()
+        val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
+        val now = Date()
+        val fileName = formatter.format(now)
+        val storageReference = FirebaseStorage.getInstance().getReference("image/$fileName")
+
+        storageReference.putFile(ImageUri).addOnSuccessListener {
+            fbImage.setImageURI(null)
+            Toast.makeText(this@CreateMapActivity, "Sucessfuly uploaded", Toast.LENGTH_SHORT).show()
+            if (progressDialog.isShowing) progressDialog.dismiss()
+
+        }.addOnFailureListener{
+            if (progressDialog.isShowing) progressDialog.dismiss()
+            Toast.makeText(this@CreateMapActivity, "Failed to upload", Toast.LENGTH_SHORT).show()
+        }
+    }*/
+
+    private fun selectImage() {
+        val intent = Intent()
+        intent.type = "image/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, 100)
+    }
+/*
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == 100 && resultCode == RESULT_OK ) {
+
+            ImageUri = data?.data!!
+            fbImage.setImageURI(ImageUri)
+
+        }
+    }
+ */
 
 }

@@ -19,9 +19,9 @@
         android:textStyle="bold"/>
 
     <ImageView
+        android:id="@+id/fbImage"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/fbImage"
         android:layout_marginVertical="30dp"
         android:scaleType="centerCrop"/>
 

@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.example.projekt7.Model.UserMap
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -29,7 +28,7 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         userMap = intent.getSerializableExtra(EXTRA_USER_MAP) as UserMap
 
-        //supportActionBar?.title = userMap.title
+        supportActionBar?.title = userMap.title
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager

@@ -22,4 +22,5 @@
         android:ems="10"
         android:hint="Description"
         android:inputType="textPersonName" />
+
 </LinearLayout>

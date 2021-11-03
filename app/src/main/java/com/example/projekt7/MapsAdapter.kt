@@ -1,6 +1,7 @@
 package com.example.projekt7
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -8,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projekt7.Model.UserMap
 
+private const val TAG = "MapsAdapter"
 data class MapsAdapter (val context : Context, val userMaps : List<UserMap>, val onClickListener: OnClickListener) : RecyclerView.Adapter<MapsAdapter.ViewHolder>() {
 
     interface OnClickListener {
@@ -22,6 +24,7 @@ data class MapsAdapter (val context : Context, val userMaps : List<UserMap>, val
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val userMap = userMaps[position]
         holder.itemView.setOnClickListener{
+            Log.i(TAG,"Tapped position $position")
             onClickListener.onItemClick(position)
         }
         val textViewTitle = holder.itemView.findViewById<TextView>(android.R.id.text1)

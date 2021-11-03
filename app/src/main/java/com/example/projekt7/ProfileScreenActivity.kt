@@ -6,6 +6,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.Toast
@@ -18,6 +19,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
 private const val REQUEST_CODE = 1234
+private const val TAG = "ProfileActivity"
 
 class ProfileScreenActivity : AppCompatActivity() {
 
@@ -35,11 +37,11 @@ class ProfileScreenActivity : AppCompatActivity() {
         rvMaps.layoutManager = LinearLayoutManager(this)
         mapAdapter = MapsAdapter(this, userMaps, object : MapsAdapter.OnClickListener {
             override fun onItemClick(position: Int) {
+                Log.i(TAG,"onItemClick $position")
                 val intent = Intent(this@ProfileScreenActivity, DisplayMapsActivity::class.java)
                 intent.putExtra(EXTRA_USER_MAP, userMaps[position])
                 startActivity(intent)
             }
-
         })
         rvMaps.adapter = mapAdapter
 
