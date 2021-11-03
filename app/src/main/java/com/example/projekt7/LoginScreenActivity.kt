@@ -27,9 +27,6 @@ class LoginScreenActivity : AppCompatActivity() {
         val buttonLogin = findViewById<Button>(R.id.buttonLogin)
         val buttonCreate = findViewById<Button>(R.id.buttonCreate)
 
-
-
-
         buttonLogin.setOnClickListener {
             loginUser()
 

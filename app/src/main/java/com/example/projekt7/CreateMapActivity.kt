@@ -112,9 +112,6 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 markers.add(marker)
                 val place = Place(title,description,latLng.latitude,latLng.longitude)
                 DataManager.db.collection("places").add(place)
-                // Lägg till "Place"
-                // db.collection("places").add(place)
-
 
             }
 
