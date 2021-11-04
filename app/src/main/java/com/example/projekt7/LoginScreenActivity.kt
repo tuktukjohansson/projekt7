@@ -19,6 +19,7 @@ class LoginScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login_screen)
 
+        supportActionBar?.hide()
         firebaseAuth = FirebaseAuth.getInstance()
 
         textEmail = findViewById(R.id.editTextEmail)
@@ -47,10 +48,15 @@ class LoginScreenActivity : AppCompatActivity() {
             return
         }
         DataManager.auth.signInWithEmailAndPassword(email,password)
-            .addOnSuccessListener { task ->
-                Log.d("!!!","$task")
-             if (task != null)
-                 gotoActivity()
+            .addOnCompleteListener { task ->
+                if(task.isSuccessful) {
+                    gotoActivity()
+                } else {
+                    Toast.makeText(
+                        this, "Email or password is invalid. Authentication failed.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
     }
 
