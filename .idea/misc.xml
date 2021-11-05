@@ -22,9 +22,9 @@
         <entry key="app/src/main/res/layout/activity_regular_user_profile.xml" value="0.1515625" />
         <entry key="app/src/main/res/layout/activity_rumaps.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_ruprofile.xml" value="0.2503725165755537" />
-        <entry key="app/src/main/res/layout/activity_save_place.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_save_place.xml" value="0.5086907972719819" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/activity_upload_image.xml" value="0.2622940863803819" />
+        <entry key="app/src/main/res/layout/activity_upload_image.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.34882016169269386" />
         <entry key="app/src/main/res/layout/dialog_create_map.xml" value="0.1393110435663627" />
         <entry key="app/src/main/res/layout/dialog_create_place.xml" value="0.335" />
