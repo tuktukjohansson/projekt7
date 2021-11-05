@@ -25,11 +25,11 @@ class CreateBOActivity : AppCompatActivity() {
 
         val createUserButton = findViewById<Button>(R.id.buttonCreateUser)
         createUserButton.setOnClickListener() {
-            nameEditText = findViewById(R.id.editTextName)
-            businessEditText = findViewById(R.id.editTextBusiness)
-            streetEditText = findViewById(R.id.editTextStreet)
-            zipEditText = findViewById(R.id.editTextZip)
-            phoneEditText = findViewById(R.id.editTextPhone)
+            nameEditText = findViewById(R.id.businessName)
+            businessEditText = findViewById(R.id.adressBusiness)
+
+            zipEditText = findViewById(R.id.phoneNumber)
+
             mailEditText = findViewById(R.id.editTextMail)
             passwordEditText = findViewById(R.id.editTextPassword)
             keyEditText = findViewById(R.id.editTextIdentityKey)

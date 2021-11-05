@@ -30,6 +30,8 @@ class ProfileScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_screen)
 
+        supportActionBar?.hide()
+
         userMaps = generateSampleData().toMutableList()
         val rvMaps = findViewById<RecyclerView>(R.id.rvMaps)
         val fabCreateMap = findViewById<FloatingActionButton>(R.id.fabCreateButton)
