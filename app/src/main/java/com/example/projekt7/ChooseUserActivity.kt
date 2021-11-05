@@ -16,6 +16,8 @@ class ChooseUserActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_user)
 
+        supportActionBar?.hide()
+
         val businessOwner = findViewById<Button>(R.id.buttonBusinessOwner)
         val regularUser = findViewById<Button>(R.id.buttonRegularUser)
 
