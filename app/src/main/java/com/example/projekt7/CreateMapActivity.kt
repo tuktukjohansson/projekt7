@@ -42,8 +42,12 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityCreateMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = intent.getStringExtra(EXTRA_MAP_TITLE)
+        supportActionBar?.setTitle("Choose your favourite spots!")
+
+        // Code is to show the map-collection the user has typed on actionbar
+        //= intent.getStringExtra(EXTRA_MAP_TITLE)
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -89,14 +93,20 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             markerToDelete.remove()
         }
 
+        //Click on map to add a marker. When marker adds to the map, a function initiate
         mMap.setOnMapLongClickListener { latLng ->
+            //Start a new activity for adding title, description, username adds automatic
+            // and upload image. By pressing button "Save", everything will be stored to
+            //Firestore
             showAlertDialog(latLng)
 
         }
-        val stockholm = LatLng(59.3, 18.0)
+        val stockholm = LatLng(59.329308, 18.068596)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stockholm, 10f))
     }
 
+
+    //This function is only for an alert dialog to show
     private fun showAlertDialog(latLng: LatLng) {
         val placeFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_place, null)
         val dialog = AlertDialog.Builder(this)
@@ -108,15 +118,20 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             .setNegativeButton("Cancel",null)
             .setPositiveButton("OK",null).show()
 
-
+    //When pressing "OK" button on alertdialog, this function initiates.
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
             val title = placeFormView.findViewById<EditText>(R.id.etTitle).text.toString()
             val description = placeFormView.findViewById<EditText>(R.id.etDescription).text.toString()
+            //If title or description is empty, a toast is returned
             if (title.trim().isEmpty() || description.trim().isEmpty()) {
                 Toast.makeText(this,"Place must have non-empty title and description", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
+            //If title and description is not empty, the marker adds position, title, description
             val marker = mMap.addMarker(MarkerOptions().position(latLng).title(title).snippet(description))
+            //Needs another variable for upload image
+            // val imageUp = ****
+            //if (marker && imageUp != null)
             if (marker != null) {
                 markers.add(marker)
                // uploadImage()
@@ -124,7 +139,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 DataManager.db.collection("places").add(place)
 
             }
-
+            //Alert dialog turns down
             dialog.dismiss()
         }
     }

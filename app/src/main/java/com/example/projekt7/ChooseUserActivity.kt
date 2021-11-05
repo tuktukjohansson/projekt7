@@ -10,18 +10,17 @@ import com.google.android.gms.tasks.OnSuccessListener
 
 class ChooseUserActivity : AppCompatActivity() {
 
-    val TAG = "!!!"
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_choose_user)
+
+        supportActionBar?.hide()
 
         val businessOwner = findViewById<Button>(R.id.buttonBusinessOwner)
         val regularUser = findViewById<Button>(R.id.buttonRegularUser)
 
         businessOwner.setOnClickListener {
             val intent = Intent(this,CreateBOActivity::class.java)
-            Log.d(TAG,"Intent: $intent")
             startActivity(intent)
         }
 
