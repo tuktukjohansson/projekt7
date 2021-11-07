@@ -149,7 +149,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             if (marker != null) {
                 markers.add(marker)
                 // uploadImage()
-                val place = Place(title, description, latLng.latitude, latLng.longitude)
+                val place = Place(title, description, latLng.latitude, latLng.longitude,)
                 DataManager.db.collection("places").add(place)
 
             }

@@ -49,8 +49,7 @@ class LoginScreenActivity : AppCompatActivity() {
                     } else {
                         Toast.makeText(
                             this, "Email or password is invalid. Authentication failed.",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                            Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -66,5 +65,6 @@ class LoginScreenActivity : AppCompatActivity() {
     fun gotoActivity() {
             val userProfile = Intent(this, ProfileScreenActivity::class.java)
             startActivity(userProfile)
+            finish()
         }
 }

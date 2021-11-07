@@ -8,9 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -18,29 +17,44 @@ import com.example.projekt7.Model.Place
 import com.example.projekt7.Model.UserMap
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
 private const val REQUEST_CODE = 1234
-private const val TAG = "Logout"
 
 class ProfileScreenActivity : AppCompatActivity() {
 
     private lateinit var userMaps: MutableList<UserMap>
     private lateinit var mapAdapter: MapsAdapter
+    private lateinit var firestoreDB : FirebaseFirestore
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_screen)
 
+        firestoreDB = FirebaseFirestore.getInstance()
+        val postReference = firestoreDB
+            .collection("places")
+            .limit(20)
+        postReference.addSnapshotListener { snapshot, exception ->
+            if (exception != null || snapshot == null) {
+                return@addSnapshotListener
+            }
+            for (document in snapshot.documents) {
+                Log.i("!!!", "Document ${document.id}: {$document.data}")
+            }
+        }
+
         userMaps = generateSampleData().toMutableList()
+
         val rvMaps = findViewById<RecyclerView>(R.id.rvMaps)
         val fabCreateMap = findViewById<FloatingActionButton>(R.id.fabCreateButton)
+        val fabSignOut = findViewById<FloatingActionButton>(R.id.fabSignOut)
 
         rvMaps.layoutManager = LinearLayoutManager(this)
         mapAdapter = MapsAdapter(this, userMaps, object : MapsAdapter.OnClickListener {
             override fun onItemClick(position: Int) {
-                Log.i(TAG, "onItemClick $position")
                 val intent = Intent(this@ProfileScreenActivity, DisplayMapsActivity::class.java)
                 intent.putExtra(EXTRA_USER_MAP, userMaps[position])
                 startActivity(intent)
@@ -53,26 +67,16 @@ class ProfileScreenActivity : AppCompatActivity() {
           startActivity(Intent(this,CreateMapActivity::class.java))
             //showAlertDialog()
         }
-    }
 
-    // Code is suppose to loggout the current user from the profile and head back to Login Activity
-    // Code failed. Log statement doesn't work when pressed on loggout icon "menu_logout". Unkown error.
-/*    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_logout, menu)
-        return true
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.menu.menu_logout) {
-            Log.i(TAG,"User login out!")
+        fabSignOut.setOnClickListener{
             FirebaseAuth.getInstance().signOut()
-            val logout = Intent(this,LoginScreenActivity::class.java)
-            logout.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-            startActivity(logout)
+            startActivity(Intent(this,LoginScreenActivity::class.java))
+            Toast.makeText(this,"Signed out!", Toast.LENGTH_SHORT).show()
+            finish()
         }
-        return super.onOptionsItemSelected(item)
+
     }
-*/
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val userMap = data?.getSerializableExtra(EXTRA_USER_MAP) as UserMap
