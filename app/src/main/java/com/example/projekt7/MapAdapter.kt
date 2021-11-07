@@ -36,6 +36,4 @@ class MapAdapter (var spotMaps : MutableList<Place>) : RecyclerView.Adapter<MapA
         val mapLatitude : TextView = itemView.findViewById(R.id.umLatitude)
 
     }
-
-
 }

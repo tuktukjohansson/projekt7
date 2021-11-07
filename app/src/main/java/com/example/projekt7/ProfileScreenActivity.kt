@@ -26,7 +26,7 @@ private const val REQUEST_CODE = 1234
 
 class ProfileScreenActivity : AppCompatActivity() {
 
-    private lateinit var userMaps: MutableList<Place>
+//    private var spotsMaps = MutableList<Place>
     private lateinit var mapAdapter: MapsAdapter
     private lateinit var firestoreDB: FirebaseFirestore
     private lateinit var dbref: DatabaseReference
@@ -39,12 +39,20 @@ class ProfileScreenActivity : AppCompatActivity() {
         firestoreDB = FirebaseFirestore.getInstance()
         val postReference = firestoreDB
             .collection("places")
-            .limit(20)
         postReference.addSnapshotListener { snapshot, exception ->
             if (exception != null || snapshot == null) {
                 return@addSnapshotListener
             }
             for (document in snapshot.documents) {
+                val title = document.get("title") as String
+                val description = document.get("description") as String
+                val longitude = document.get("longitude") as Double
+                val latitude = document.get("latitude") as Double
+                val imageUrl = document.get("imgUrl") as String
+
+                val addPlace = Place(title,description,longitude,latitude,imageUrl)
+//                spotsMaps.add(addPlace)
+
                 Log.i("!!!", "Document ${document.id}: {$document.data}")
             }
         }
@@ -58,8 +66,8 @@ class ProfileScreenActivity : AppCompatActivity() {
         rvMaps.layoutManager = LinearLayoutManager(this)
         rvMaps.setHasFixedSize(true)
 
-        userMaps = mutableListOf<Place>()
-        getUserData()
+//        userMaps = mutableListOf<Place>()
+//        getUserData()
  /*       mapAdapter = MapsAdapter(this, , object : MapsAdapter.OnClickListener {
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@ProfileScreenActivity, DisplayMapsActivity::class.java)
@@ -85,7 +93,7 @@ class ProfileScreenActivity : AppCompatActivity() {
 
     }
 
-    private fun getUserData() {
+/*    private fun getUserData() {
 
         dbref = FirebaseDatabase.getInstance().getReference("places")
         dbref.addValueEventListener(object : ValueEventListener{
@@ -105,7 +113,7 @@ class ProfileScreenActivity : AppCompatActivity() {
         })
 
     }
-
+*/
 
 
 /*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

@@ -69,9 +69,13 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val dialog = AlertDialog.Builder(this)
             .setTitle("Save a spot")
             .setView(placeFormView)
+            .setNeutralButton("Upload image", null)
             .setNegativeButton("Cancel", null)
             .setPositiveButton("OK", null).show()
 
+        dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener {
+
+        }
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
             val title = placeFormView.findViewById<EditText>(R.id.etTitle).text.toString()
@@ -87,7 +91,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             }
             val marker = mMap.addMarker(MarkerOptions().position(latLng).title(title).snippet(description))
             if (marker != null) {
-                val place = Place(title, description, latLng.latitude, latLng.longitude,)
+                val place = Place(title, description, latLng.latitude, latLng.longitude)
                 DataManager.db.collection("places").add(place)
             }
             dialog.dismiss()
