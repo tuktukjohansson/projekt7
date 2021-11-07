@@ -19,6 +19,8 @@ class CreateRUActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_ruactivity)
 
+        supportActionBar?.hide()
+
         val createUserButton = findViewById<Button>(R.id.buttonCreateUser)
         createUserButton.setOnClickListener(){
             nameEditText = findViewById(R.id.businessName)
