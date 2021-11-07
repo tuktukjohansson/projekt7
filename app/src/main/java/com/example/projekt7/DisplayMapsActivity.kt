@@ -3,6 +3,7 @@ package com.example.projekt7
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.projekt7.Model.Place
 import com.example.projekt7.Model.UserMap
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -19,16 +20,16 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityDisplayMapsBinding
-    private lateinit var userMap: UserMap
+    private lateinit var userMap: Place
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDisplayMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        userMap = intent.getSerializableExtra(EXTRA_USER_MAP) as UserMap
+        //userMap = intent.getSerializableExtra(EXTRA_USER_MAP) as UserMap
 
-        supportActionBar?.title = userMap.title
+        //supportActionBar?.title = userMap.title
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
@@ -48,16 +49,17 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
 
-        Log.i(TAG,"user map to render: ${userMap.title}")
-
         val bounceBuilder = LatLngBounds.Builder()
 
-        for (place in userMap.places) {
+        /*for (place in userMap.places) {
             val latLng = LatLng(place.latitude , place.longitude)
             bounceBuilder.include(latLng)
             mMap.addMarker(MarkerOptions().position(latLng).title(place.title).snippet(place.description))
         }
         mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounceBuilder.build(), 1000,1000,0))
 //        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounceBuilder.build(), 1000,1000,0))
+    }
+
+         */
     }
 }

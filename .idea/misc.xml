@@ -40,6 +40,7 @@
         <entry key="app/src/main/res/layout/info_window_ru.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_saved_spots.xml" value="0.25" />
         <entry key="app/src/main/res/layout/nav_header.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/user_maps_saved.xml" value="0.25" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.28205128205128205" />
         <entry key="app/src/main/res/menu/create_map.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/menu/map.xml" value="0.1" />

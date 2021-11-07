@@ -17,6 +17,7 @@ import com.example.projekt7.Model.Place
 import com.example.projekt7.Model.UserMap
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.google.firebase.firestore.FirebaseFirestore
 
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
@@ -25,9 +26,11 @@ private const val REQUEST_CODE = 1234
 
 class ProfileScreenActivity : AppCompatActivity() {
 
-    private lateinit var userMaps: MutableList<UserMap>
+    private lateinit var userMaps: MutableList<Place>
     private lateinit var mapAdapter: MapsAdapter
-    private lateinit var firestoreDB : FirebaseFirestore
+    private lateinit var firestoreDB: FirebaseFirestore
+    private lateinit var dbref: DatabaseReference
+    private lateinit var rvMaps: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,38 +49,68 @@ class ProfileScreenActivity : AppCompatActivity() {
             }
         }
 
-        userMaps = generateSampleData().toMutableList()
+//        userMaps = generateSampleData().toMutableList()
 
-        val rvMaps = findViewById<RecyclerView>(R.id.rvMaps)
+        rvMaps = findViewById(R.id.rvMaps)
         val fabCreateMap = findViewById<FloatingActionButton>(R.id.fabCreateButton)
         val fabSignOut = findViewById<FloatingActionButton>(R.id.fabSignOut)
 
         rvMaps.layoutManager = LinearLayoutManager(this)
-        mapAdapter = MapsAdapter(this, userMaps, object : MapsAdapter.OnClickListener {
+        rvMaps.setHasFixedSize(true)
+
+        userMaps = mutableListOf<Place>()
+        getUserData()
+ /*       mapAdapter = MapsAdapter(this, , object : MapsAdapter.OnClickListener {
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@ProfileScreenActivity, DisplayMapsActivity::class.java)
                 intent.putExtra(EXTRA_USER_MAP, userMaps[position])
                 startActivity(intent)
             }
         })
-        rvMaps.adapter = mapAdapter
+
+  */
+
+        //       getUserData()
 
         fabCreateMap.setOnClickListener {
-          //  val intent = Intent(this@ProfileScreenActivity, CreateMapActivity::class.java)
-          startActivity(Intent(this,CreateMapActivity::class.java))
-            //showAlertDialog()
+//            val intent = Intent(this@ProfileScreenActivity, CreateMapActivity::class.java)
+            startActivity(Intent(this,CreateMapActivity::class.java))
+//            showAlertDialog()
         }
 
-        fabSignOut.setOnClickListener{
+        fabSignOut.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
-            startActivity(Intent(this,LoginScreenActivity::class.java))
-            Toast.makeText(this,"Signed out!", Toast.LENGTH_SHORT).show()
+            startActivity(Intent(this, LoginScreenActivity::class.java))
+            Toast.makeText(this, "Signed out!", Toast.LENGTH_SHORT).show()
             finish()
         }
 
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    private fun getUserData() {
+
+        dbref = FirebaseDatabase.getInstance().getReference("places")
+        dbref.addValueEventListener(object : ValueEventListener{
+
+            override fun onDataChange(snapshot: DataSnapshot) {
+                if (snapshot.exists()){
+                    for (userSnapshot in snapshot.children){
+                        val user = userSnapshot.getValue(Place::class.java)
+                        userMaps.add(user!!)
+                    }
+                    rvMaps.adapter = MapAdapter(userMaps)
+                }
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+
+    }
+
+
+
+/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val userMap = data?.getSerializableExtra(EXTRA_USER_MAP) as UserMap
             userMaps.add(userMap)
@@ -85,7 +118,7 @@ class ProfileScreenActivity : AppCompatActivity() {
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
-
+*/
     private fun showAlertDialog() {
         val mapFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_map, null)
         val dialog = AlertDialog.Builder(this)
@@ -107,13 +140,13 @@ class ProfileScreenActivity : AppCompatActivity() {
             dialog.dismiss()
         }
     }
+}
 
-
-    private fun generateSampleData(): List<UserMap> {
+/*    private fun generateSampleData(): List<UserMap> {
         return listOf()
     }
 }
-/*
+
             UserMap("Memories from University", listOf(Place("Branner Hall", "Best dorm at Stanford", 37.426, -122.163),
                 Place("Gates CS building", "Many long nights in this basement", 37.430, -122.173),
                 Place("Pinkberry", "First date with my wife", 37.444, -122.170))),

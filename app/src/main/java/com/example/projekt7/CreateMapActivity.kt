@@ -81,12 +81,12 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                     marker.position.longitude
                 )
             }
-            val userMap = UserMap(intent.getStringExtra(EXTRA_MAP_TITLE), places)
+/*            val userMap = UserMap(intent.getStringExtra(EXTRA_MAP_TITLE), places)
             val data = Intent()
             data.putExtra(EXTRA_USER_MAP, userMap)
             setResult(Activity.RESULT_OK, data)
             finish()
-            return true
+*/            return true
         }
 
         return super.onOptionsItemSelected(item)
@@ -102,11 +102,11 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
         //Click on map to add a marker. When marker adds to the map, a function initiate
         mMap.setOnMapLongClickListener { latLng ->
-            startActivity(Intent(this, UploadImageActivity::class.java))
+            //startActivity(Intent(this, UploadImageActivity::class.java))
             //Start a new activity for adding title, description, username adds automatic
             // and upload image. By pressing button "Save", everything will be stored to
             //Firestore
-            //showAlertDialog(latLng)
+            showAlertDialog(latLng)
 
         }
         val stockholm = LatLng(59.329308, 18.068596)
