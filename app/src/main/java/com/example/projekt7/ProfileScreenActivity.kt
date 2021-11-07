@@ -73,9 +73,7 @@ class ProfileScreenActivity : AppCompatActivity() {
         //       getUserData()
 
         fabCreateMap.setOnClickListener {
-//            val intent = Intent(this@ProfileScreenActivity, CreateMapActivity::class.java)
             startActivity(Intent(this,CreateMapActivity::class.java))
-//            showAlertDialog()
         }
 
         fabSignOut.setOnClickListener {
@@ -142,9 +140,10 @@ class ProfileScreenActivity : AppCompatActivity() {
     }
 }
 
-/*    private fun generateSampleData(): List<UserMap> {
+    private fun generateSampleData(): List<Place> {
         return listOf()
     }
+/*
 }
 
             UserMap("Memories from University", listOf(Place("Branner Hall", "Best dorm at Stanford", 37.426, -122.163),

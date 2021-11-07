@@ -32,7 +32,6 @@ import java.util.*
 
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    lateinit var ImageUri: Uri
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityCreateMapBinding
     private var markers: MutableList<Marker> = mutableListOf()
@@ -58,13 +57,6 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 .setActionTextColor(ContextCompat.getColor(this, android.R.color.white))
                 .show()
         }
-    }
-
-    //val fbImage = findViewById<ImageView>(R.id.fbImage)
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_create_map, menu)
-        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
@@ -120,9 +112,6 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val dialog = AlertDialog.Builder(this)
             .setTitle("Save a spot")
             .setView(placeFormView)
-            .setNeutralButton("Select Image") { dialog, which ->
-//                selectImage()
-            }
             .setNegativeButton("Cancel", null)
             .setPositiveButton("OK", null).show()
 
@@ -131,7 +120,6 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             val title = placeFormView.findViewById<EditText>(R.id.etTitle).text.toString()
             val description =
                 placeFormView.findViewById<EditText>(R.id.etDescription).text.toString()
-            //If title or description is empty, a toast is returned
             if (title.trim().isEmpty() || description.trim().isEmpty()) {
                 Toast.makeText(
                     this,
@@ -141,14 +129,9 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 return@setOnClickListener
             }
             //If title and description is not empty, the marker adds position, title, description
-            val marker =
-                mMap.addMarker(MarkerOptions().position(latLng).title(title).snippet(description))
-            //Needs another variable for upload image
-            // val imageUp = ****
-            //if (marker && imageUp != null)
+            val marker = mMap.addMarker(MarkerOptions().position(latLng).title(title).snippet(description))
             if (marker != null) {
                 markers.add(marker)
-                // uploadImage()
                 val place = Place(title, description, latLng.latitude, latLng.longitude,)
                 DataManager.db.collection("places").add(place)
 
@@ -158,49 +141,3 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
     }
 }
-
-/*    private fun uploadImage() {
-        val progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Uploading File...")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
-        val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
-        val now = Date()
-        val fileName = formatter.format(now)
-        val storageReference = FirebaseStorage.getInstance().getReference("image/$fileName")
-
-        storageReference.putFile(ImageUri).addOnSuccessListener {
-            fbImage.setImageURI(null)
-            Toast.makeText(this@CreateMapActivity, "Sucessfuly uploaded", Toast.LENGTH_SHORT).show()
-            if (progressDialog.isShowing) progressDialog.dismiss()
-
-        }.addOnFailureListener{
-            if (progressDialog.isShowing) progressDialog.dismiss()
-            Toast.makeText(this@CreateMapActivity, "Failed to upload", Toast.LENGTH_SHORT).show()
-        }
-    }*/
-
-/*    private fun selectImage() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent, 100)
-    }
-
- */
-/*
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == 100 && resultCode == RESULT_OK ) {
-
-            ImageUri = data?.data!!
-            fbImage.setImageURI(ImageUri)
-
-        }
-    }
- */
-
-}
-}
- */
