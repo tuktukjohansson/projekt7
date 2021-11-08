@@ -17,7 +17,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.*
 
-const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
+//const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
 private const val REQUEST_CODE = 1234
 
@@ -51,7 +51,7 @@ class ProfileScreenActivity : AppCompatActivity() {
         profileAdapter = ProfileAdapter(mapsList)
         recyclerView.adapter = profileAdapter
 
-        SpotsListener()
+        spotsListener()
 
 //        userMaps = generateSampleData().toMutableList()
 
@@ -80,7 +80,7 @@ class ProfileScreenActivity : AppCompatActivity() {
 
     }
 
-    private fun SpotsListener() {
+    private fun spotsListener() {
         db = FirebaseFirestore.getInstance()
         db.collection("places")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
@@ -98,6 +98,7 @@ class ProfileScreenActivity : AppCompatActivity() {
                 }
             })
     }
+}
 
 
 /*    private fun getUserData() {
@@ -132,7 +133,7 @@ class ProfileScreenActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 */
-        private fun showAlertDialog() {
+/*        private fun showAlertDialog() {
             val mapFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_map, null)
             val dialog = AlertDialog.Builder(this)
                 .setTitle("Map Title")
@@ -154,7 +155,7 @@ class ProfileScreenActivity : AppCompatActivity() {
             }
         }
     }
-
+*/
 /*    private fun generateSampleData(): List<Place> {
         return listOf()
     }
