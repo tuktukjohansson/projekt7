@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projekt7.Model.Place
 
-class ProfileAdapter(var spotMaps : ArrayList<Place>) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
+data class ProfileAdapter(var spotMaps : ArrayList<Place>) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_maps_saved,parent,false)
         return ViewHolder(itemView)
