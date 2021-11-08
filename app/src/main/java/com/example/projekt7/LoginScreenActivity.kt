@@ -20,7 +20,6 @@ class LoginScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login_screen)
 
         supportActionBar?.hide()
-        // If user is still logged in: profile activity starts instantly.
         firebaseAuth = FirebaseAuth.getInstance()
         if (DataManager.auth.currentUser != null){
             gotoActivity()

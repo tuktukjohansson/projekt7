@@ -7,9 +7,6 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.ktx.Firebase
 
 class CreateRUActivity : AppCompatActivity() {
     lateinit var nameEditText: EditText
@@ -22,9 +19,11 @@ class CreateRUActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_ruactivity)
 
+        supportActionBar?.hide()
+
         val createUserButton = findViewById<Button>(R.id.buttonCreateUser)
         createUserButton.setOnClickListener(){
-            nameEditText = findViewById(R.id.editTextName)
+            nameEditText = findViewById(R.id.businessName)
             mailEditText = findViewById(R.id.editTextMail)
             userNameEditText = findViewById(R.id.editTextUserName)
             passwordEditText = findViewById(R.id.editTextPassword)

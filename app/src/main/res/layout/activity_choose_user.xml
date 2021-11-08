@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ChooseUserActivity"
-    android:background="@drawable/gradient_background">
+    android:background="@drawable/gardient_background">
 
 
     <Button
@@ -13,8 +13,11 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginTop="125dp"
-        android:background="@drawable/button_login"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
+        android:textColor="@color/black"
         android:text="Business Owner"
+        android:textAllCaps="true"
+        android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -24,12 +27,14 @@
         android:layout_width="150dp"
         android:layout_height="150dp"
         android:layout_marginBottom="125dp"
-        android:background="@drawable/button_create"
+        android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
+        android:textColor="@color/black"
         android:text="Regular User"
+        android:textAllCaps="true"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buttonBusinessOwner"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toBottomOf="@+id/buttonBusinessOwner" />
 </androidx.constraintlayout.widget.ConstraintLayout>
