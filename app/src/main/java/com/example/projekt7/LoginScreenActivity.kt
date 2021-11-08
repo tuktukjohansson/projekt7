@@ -20,8 +20,10 @@ class LoginScreenActivity : AppCompatActivity() {
         setContentView(R.layout.activity_login_screen)
 
         supportActionBar?.hide()
-
         firebaseAuth = FirebaseAuth.getInstance()
+        if (DataManager.auth.currentUser != null){
+            gotoActivity()
+        }
 
         textEmail = findViewById(R.id.editTextEmail)
         textPassword = findViewById(R.id.editTextPassword)
@@ -30,7 +32,25 @@ class LoginScreenActivity : AppCompatActivity() {
         val buttonCreate = findViewById<Button>(R.id.buttonCreate)
 
         buttonLogin.setOnClickListener {
-            loginUser()
+            //buttonLogin.isEnabled = false
+            //loginUser()
+            var email = textEmail.text.toString()
+            var password = textPassword.text.toString()
+            if(email.isEmpty() || password.isEmpty()){
+                Toast.makeText(applicationContext,"Enter an email and password", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            DataManager.auth.signInWithEmailAndPassword(email,password)
+                .addOnCompleteListener { task ->
+                    //buttonLogin.isEnabled = true
+                    if(task.isSuccessful) {
+                        gotoActivity()
+                    } else {
+                        Toast.makeText(
+                            this, "Email or password is invalid. Authentication failed.",
+                            Toast.LENGTH_SHORT).show()
+                    }
+                }
 
             }
 
@@ -41,23 +61,9 @@ class LoginScreenActivity : AppCompatActivity() {
 
     }
 
-    fun loginUser() {
-        var email = textEmail.text.toString()
-        var password = textPassword.text.toString()
-        if(email.isEmpty() || password.isEmpty()){
-            Toast.makeText(applicationContext,"Enter an email and password", Toast.LENGTH_SHORT).show()
-            return
-        }
-        DataManager.auth.signInWithEmailAndPassword(email,password)
-            .addOnSuccessListener { task ->
-                Log.d("!!!","$task")
-             if (task != null)
-                 gotoActivity()
-            }
-    }
-
     fun gotoActivity() {
             val userProfile = Intent(this, ProfileScreenActivity::class.java)
             startActivity(userProfile)
+            finish()
         }
 }

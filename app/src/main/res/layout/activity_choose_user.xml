@@ -10,8 +10,8 @@
 
     <Button
         android:id="@+id/buttonBusinessOwner"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginTop="125dp"
         android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
         android:textColor="@color/black"
@@ -24,9 +24,8 @@
 
     <Button
         android:id="@+id/buttonRegularUser"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
-        android:layout_marginTop="60dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="125dp"
         android:backgroundTint="@color/common_google_signin_btn_text_dark_pressed"
         android:textColor="@color/black"

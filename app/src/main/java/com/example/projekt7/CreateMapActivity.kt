@@ -32,141 +32,71 @@ import java.util.*
 
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
-    lateinit var ImageUri : Uri
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityCreateMapBinding
-    private var markers : MutableList<Marker> = mutableListOf()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityCreateMapBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        supportActionBar?.title = intent.getStringExtra(EXTRA_MAP_TITLE)
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
+        supportActionBar?.hide()
+
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
 
         mapFragment.view?.let {
-            Snackbar.make(it,"Long press to add a marker!", Snackbar.LENGTH_INDEFINITE)
-                .setAction("OK", {})
-                .setActionTextColor(ContextCompat.getColor(this,android.R.color.white))
+            Snackbar.make(it, "Long press to add a marker!", Snackbar.LENGTH_INDEFINITE)
+                .setAction("Got it!", {})
+                .setActionTextColor(ContextCompat.getColor(this, android.R.color.white))
                 .show()
         }
     }
 
-    //val fbImage = findViewById<ImageView>(R.id.fbImage)
-
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_create_map, menu)
-        return super.onCreateOptionsMenu(menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.miSave) {
-            if (markers.isEmpty()) {
-                Toast.makeText(this,"There must be at least one marker", Toast.LENGTH_LONG).show()
-                return true
-            }
-            val places = markers.map { marker -> Place(marker.title, marker.snippet, marker.position.latitude, marker.position.longitude) }
-            val userMap = UserMap(intent.getStringExtra(EXTRA_MAP_TITLE), places)
-            val data = Intent()
-            data.putExtra(EXTRA_USER_MAP, userMap)
-            setResult(Activity.RESULT_OK, data)
-            finish()
-            return true
-        }
-
-        return super.onOptionsItemSelected(item)
-    }
-
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-
-        mMap.setOnInfoWindowClickListener{ markerToDelete ->
-            markers.remove(markerToDelete)
-            markerToDelete.remove()
-        }
-
         mMap.setOnMapLongClickListener { latLng ->
             showAlertDialog(latLng)
-
         }
-        val stockholm = LatLng(59.3, 18.0)
+        val stockholm = LatLng(59.329308, 18.068596)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stockholm, 10f))
     }
+
 
     private fun showAlertDialog(latLng: LatLng) {
         val placeFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_place, null)
         val dialog = AlertDialog.Builder(this)
             .setTitle("Save a spot")
             .setView(placeFormView)
-            .setNeutralButton("Select Image") {dialog, which ->
-                selectImage()
-            }
-            .setNegativeButton("Cancel",null)
-            .setPositiveButton("OK",null).show()
+            .setNeutralButton("Upload image", null)
+            .setNegativeButton("Cancel", null)
+            .setPositiveButton("OK", null).show()
 
+        dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener {
+
+        }
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
             val title = placeFormView.findViewById<EditText>(R.id.etTitle).text.toString()
-            val description = placeFormView.findViewById<EditText>(R.id.etDescription).text.toString()
+            val description =
+                placeFormView.findViewById<EditText>(R.id.etDescription).text.toString()
             if (title.trim().isEmpty() || description.trim().isEmpty()) {
-                Toast.makeText(this,"Place must have non-empty title and description", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    this,
+                    "Place must have non-empty title and description",
+                    Toast.LENGTH_SHORT
+                ).show()
                 return@setOnClickListener
             }
             val marker = mMap.addMarker(MarkerOptions().position(latLng).title(title).snippet(description))
             if (marker != null) {
-                markers.add(marker)
-               // uploadImage()
-                val place = Place(title,description,latLng.latitude,latLng.longitude)
+                val place = Place(title, description, latLng.latitude, latLng.longitude)
                 DataManager.db.collection("places").add(place)
-
             }
-
             dialog.dismiss()
+            startActivity(Intent(this,ProfileScreenActivity::class.java))
+            finish()
         }
     }
-
-/*    private fun uploadImage() {
-        val progressDialog = ProgressDialog(this)
-        progressDialog.setMessage("Uploading File...")
-        progressDialog.setCancelable(false)
-        progressDialog.show()
-        val formatter = SimpleDateFormat("yyyy_MM_dd_HH_mm_ss", Locale.getDefault())
-        val now = Date()
-        val fileName = formatter.format(now)
-        val storageReference = FirebaseStorage.getInstance().getReference("image/$fileName")
-
-        storageReference.putFile(ImageUri).addOnSuccessListener {
-            fbImage.setImageURI(null)
-            Toast.makeText(this@CreateMapActivity, "Sucessfuly uploaded", Toast.LENGTH_SHORT).show()
-            if (progressDialog.isShowing) progressDialog.dismiss()
-
-        }.addOnFailureListener{
-            if (progressDialog.isShowing) progressDialog.dismiss()
-            Toast.makeText(this@CreateMapActivity, "Failed to upload", Toast.LENGTH_SHORT).show()
-        }
-    }*/
-
-    private fun selectImage() {
-        val intent = Intent()
-        intent.type = "image/*"
-        intent.action = Intent.ACTION_GET_CONTENT
-        startActivityForResult(intent, 100)
-    }
-/*
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-
-        if (requestCode == 100 && resultCode == RESULT_OK ) {
-
-            ImageUri = data?.data!!
-            fbImage.setImageURI(ImageUri)
-
-        }
-    }
- */
-
 }
