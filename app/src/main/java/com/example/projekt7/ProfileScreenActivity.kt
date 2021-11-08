@@ -1,6 +1,5 @@
 package com.example.projekt7
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -9,16 +8,14 @@ import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projekt7.Model.Place
-import com.example.projekt7.Model.UserMap
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
-import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.*
 
 const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
@@ -26,51 +23,40 @@ private const val REQUEST_CODE = 1234
 
 class ProfileScreenActivity : AppCompatActivity() {
 
-//    private var spotsMaps = MutableList<Place>
-    private lateinit var mapAdapter: MapsAdapter
+    /*    private lateinit var mapAdapter: MapsAdapter
     private lateinit var firestoreDB: FirebaseFirestore
     private lateinit var dbref: DatabaseReference
     private lateinit var rvMaps: RecyclerView
+*/
+    private lateinit var recyclerView: RecyclerView
+    private lateinit var mapsList: ArrayList<Place>
+    private lateinit var db: FirebaseFirestore
+    private lateinit var profileAdapter: ProfileAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_screen)
 
+        val fabCreateMap = findViewById<FloatingActionButton>(R.id.fabCreateButton)
+        val fabSignOut = findViewById<FloatingActionButton>(R.id.fabSignOut)
+        recyclerView = findViewById(R.id.rvProfileScreen)
+
         supportActionBar?.hide()
 
-        firestoreDB = FirebaseFirestore.getInstance()
-        val postReference = firestoreDB
-            .collection("places")
-        postReference.addSnapshotListener { snapshot, exception ->
-            if (exception != null || snapshot == null) {
-                return@addSnapshotListener
-            }
-            for (document in snapshot.documents) {
-/*                val title = document.get("title") as String
-                val description = document.get("description") as String
-                val longitude = document.get("longitude") as Double
-                val latitude = document.get("latitude") as Double
-                val imageUrl = document.get("imgUrl") as String
+        recyclerView.layoutManager = LinearLayoutManager(this)
+        recyclerView.setHasFixedSize(true)
 
-                val addPlace = Place(title,description,longitude,latitude,imageUrl)
-//                spotsMaps.add(addPlace)
-*/
-                Log.i("!!!", "Document ${document.id}: {$document.data}")
-            }
-        }
+        mapsList = arrayListOf()
+
+        profileAdapter = ProfileAdapter(mapsList)
+        recyclerView.adapter = profileAdapter
+
+        SpotsListener()
 
 //        userMaps = generateSampleData().toMutableList()
 
-        rvMaps = findViewById(R.id.rvMaps)
-        val fabCreateMap = findViewById<FloatingActionButton>(R.id.fabCreateButton)
-        val fabSignOut = findViewById<FloatingActionButton>(R.id.fabSignOut)
 
-        rvMaps.layoutManager = LinearLayoutManager(this)
-        rvMaps.setHasFixedSize(true)
-
-//        userMaps = mutableListOf<Place>()
-//        getUserData()
- /*       mapAdapter = MapsAdapter(this, , object : MapsAdapter.OnClickListener {
+        /*       mapAdapter = MapsAdapter(this, , object : MapsAdapter.OnClickListener {
             override fun onItemClick(position: Int) {
                 val intent = Intent(this@ProfileScreenActivity, DisplayMapsActivity::class.java)
                 intent.putExtra(EXTRA_USER_MAP, userMaps[position])
@@ -80,10 +66,9 @@ class ProfileScreenActivity : AppCompatActivity() {
 
   */
 
-        //       getUserData()
 
         fabCreateMap.setOnClickListener {
-            startActivity(Intent(this,CreateMapActivity::class.java))
+            startActivity(Intent(this, CreateMapActivity::class.java))
         }
 
         fabSignOut.setOnClickListener {
@@ -94,6 +79,26 @@ class ProfileScreenActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun SpotsListener() {
+        db = FirebaseFirestore.getInstance()
+        db.collection("places")
+            .addSnapshotListener(object : EventListener<QuerySnapshot> {
+                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                    if (error != null) {
+                        Log.e("Firestore Error", error.message.toString())
+                        return
+                    }
+                    for (dc: DocumentChange in value?.documentChanges!!) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
+                            mapsList.add(dc.document.toObject(Place::class.java))
+                        }
+                    }
+                    profileAdapter.notifyDataSetChanged()
+                }
+            })
+    }
+
 
 /*    private fun getUserData() {
 
@@ -118,7 +123,7 @@ class ProfileScreenActivity : AppCompatActivity() {
 */
 
 
-/*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        /*    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode == REQUEST_CODE && resultCode == Activity.RESULT_OK) {
             val userMap = data?.getSerializableExtra(EXTRA_USER_MAP) as UserMap
             userMaps.add(userMap)
@@ -127,33 +132,34 @@ class ProfileScreenActivity : AppCompatActivity() {
         super.onActivityResult(requestCode, resultCode, data)
     }
 */
-    private fun showAlertDialog() {
-        val mapFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_map, null)
-        val dialog = AlertDialog.Builder(this)
-            .setTitle("Map Title")
-            .setView(mapFormView)
-            .setNegativeButton("Cancel", null)
-            .setPositiveButton("OK", null).show()
+        private fun showAlertDialog() {
+            val mapFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_map, null)
+            val dialog = AlertDialog.Builder(this)
+                .setTitle("Map Title")
+                .setView(mapFormView)
+                .setNegativeButton("Cancel", null)
+                .setPositiveButton("OK", null).show()
 
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-            val title = mapFormView.findViewById<EditText>(R.id.etTitleS).text.toString()
-            if (title.trim().isEmpty()) {
-                Toast.makeText(this, "Map must have non-empty title", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
+            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
+                val title = mapFormView.findViewById<EditText>(R.id.etTitleS).text.toString()
+                if (title.trim().isEmpty()) {
+                    Toast.makeText(this, "Map must have non-empty title", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+                val intent = Intent(this@ProfileScreenActivity, CreateMapActivity::class.java)
+                intent.putExtra(EXTRA_MAP_TITLE, title)
+                startActivityForResult(intent, REQUEST_CODE)
+
+                dialog.dismiss()
             }
-            val intent = Intent(this@ProfileScreenActivity, CreateMapActivity::class.java)
-            intent.putExtra(EXTRA_MAP_TITLE, title)
-            startActivityForResult(intent, REQUEST_CODE)
-
-            dialog.dismiss()
         }
     }
-}
 
-    private fun generateSampleData(): List<Place> {
+/*    private fun generateSampleData(): List<Place> {
         return listOf()
     }
-/*
+
+
 }
 
             UserMap("Memories from University", listOf(Place("Branner Hall", "Best dorm at Stanford", 37.426, -122.163),
