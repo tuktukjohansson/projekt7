@@ -36,6 +36,8 @@ class ProfileScreenActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_screen)
 
+        supportActionBar?.hide()
+
         firestoreDB = FirebaseFirestore.getInstance()
         val postReference = firestoreDB
             .collection("places")
