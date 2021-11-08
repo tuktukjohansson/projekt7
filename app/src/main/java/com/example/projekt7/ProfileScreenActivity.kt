@@ -44,7 +44,7 @@ class ProfileScreenActivity : AppCompatActivity() {
                 return@addSnapshotListener
             }
             for (document in snapshot.documents) {
-                val title = document.get("title") as String
+/*                val title = document.get("title") as String
                 val description = document.get("description") as String
                 val longitude = document.get("longitude") as Double
                 val latitude = document.get("latitude") as Double
@@ -52,7 +52,7 @@ class ProfileScreenActivity : AppCompatActivity() {
 
                 val addPlace = Place(title,description,longitude,latitude,imageUrl)
 //                spotsMaps.add(addPlace)
-
+*/
                 Log.i("!!!", "Document ${document.id}: {$document.data}")
             }
         }
