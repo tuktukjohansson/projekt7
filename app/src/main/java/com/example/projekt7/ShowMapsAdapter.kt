@@ -20,9 +20,9 @@ class ShowMapsAdapter(val context: Context) : GoogleMap.InfoWindowAdapter {
 
         val place = marker.tag as Place
 
-/*        titleView.text = place.title
-        descriptView.text = place.description
-*/
+        titleView.setText(place.title)
+        descriptView.setText(place.description)
+
         return infoWindow
     }
 
