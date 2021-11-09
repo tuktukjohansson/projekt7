@@ -82,9 +82,11 @@ class ProfileScreenActivity : AppCompatActivity() {
 
     private fun spotsListener() {
         db = FirebaseFirestore.getInstance()
+        //1
         db.collection("places")
             .addSnapshotListener(object : EventListener<QuerySnapshot> {
                 override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+                    //2
                     if (error != null) {
                         Log.e("Firestore Error", error.message.toString())
                         return
@@ -94,9 +96,11 @@ class ProfileScreenActivity : AppCompatActivity() {
                             mapsList.add(dc.document.toObject(Place::class.java))
                         }
                     }
+                    //3
                     profileAdapter.notifyDataSetChanged()
                 }
             })
+        //4
     }
 }
 

@@ -7,6 +7,7 @@ import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuItem
@@ -26,6 +27,8 @@ import com.google.android.gms.maps.model.MarkerOptions
 import com.example.projekt7.databinding.ActivityCreateMapBinding
 import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.firestore.*
+import com.google.firebase.firestore.EventListener
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
@@ -33,7 +36,9 @@ import java.util.*
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+
     private lateinit var binding: ActivityCreateMapBinding
+    val mapsList = arrayListOf<Place>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -61,6 +66,10 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         }
         val stockholm = LatLng(59.329308, 18.068596)
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(stockholm, 10f))
+
+        val showMapsAdapter = ShowMapsAdapter(this)
+        mMap.setInfoWindowAdapter(showMapsAdapter)
+        spotsListener()
     }
 
 
@@ -99,4 +108,35 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             finish()
         }
     }
+
+    private fun spotsListener() {
+        val db = FirebaseFirestore.getInstance()
+
+        db.collection("places")
+            .addSnapshotListener(object : EventListener<QuerySnapshot> {
+                override fun onEvent(value: QuerySnapshot?, error: FirebaseFirestoreException?) {
+
+                    if (error != null) {
+                        Log.e("Firestore Error", error.message.toString())
+                        return
+                    }
+                    for (dc: DocumentChange in value?.documentChanges!!) {
+                        if (dc.type == DocumentChange.Type.ADDED) {
+                            mapsList.add(dc.document.toObject(Place::class.java))
+                        }
+                    }
+                    createMarkers()
+                }
+            })
+    }
+
+
+    fun createMarkers(){
+        for(place in mapsList){
+            val position = LatLng(place.latitude, place.longitude)
+            val mark = mMap.addMarker(MarkerOptions().position(position))
+            mark.tag = place
+        }
+    }
+
 }
