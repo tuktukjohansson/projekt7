@@ -41,7 +41,7 @@
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_upload_image.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.34882016169269386" />
-        <entry key="app/src/main/res/layout/dialog_create_map.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/dialog_create_map.xml" value="0.335" />
         <entry key="app/src/main/res/layout/dialog_create_place.xml" value="0.19805194805194806" />
         <entry key="app/src/main/res/layout/fragment_saved_spots.xml" value="0.18568840579710144" />
         <entry key="app/src/main/res/layout/fragment_shared_spots.xml" value="0.2826780907920122" />
