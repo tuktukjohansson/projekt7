@@ -9,7 +9,7 @@ import com.example.projekt7.Model.Place
 
 data class ProfileAdapter(var spotMaps : ArrayList<Place>) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.user_maps_saved,parent,false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.usermaps_saved,parent,false)
         return ViewHolder(itemView)
     }
 
