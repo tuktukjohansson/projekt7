@@ -4,6 +4,7 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.EditText
+import android.widget.TextView
 import com.example.projekt7.Model.Place
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
@@ -15,13 +16,13 @@ class ShowMapsAdapter(val context: Context) : GoogleMap.InfoWindowAdapter {
     override fun getInfoWindow(marker: Marker): View? {
         val infoWindow = layoutInflater.inflate(R.layout.snippet_dialog, null)
 
-        val titleView = infoWindow.findViewById<EditText>(R.id.snippTitle)
-        val descriptView = infoWindow.findViewById<EditText>(R.id.snippDescription)
+        val titleView = infoWindow.findViewById<TextView>(R.id.snippTitle)
+        val descriptView = infoWindow.findViewById<TextView>(R.id.snippDescription)
 
         val place = marker.tag as Place
 
-        titleView.setText(place.title)
-        descriptView.setText(place.description)
+        titleView.text = place.title
+        descriptView.text = place.description
 
         return infoWindow
     }

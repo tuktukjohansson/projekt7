@@ -1,23 +1,16 @@
 package com.example.projekt7
 
-import android.app.Activity
-import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.Menu
-import android.view.MenuItem
 import android.widget.EditText
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import com.example.projekt7.Model.Place
-import com.example.projekt7.Model.UserMap
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -25,12 +18,9 @@ import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import com.example.projekt7.databinding.ActivityCreateMapBinding
-import com.google.android.gms.maps.model.Marker
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
-import com.google.firebase.storage.FirebaseStorage
-import java.text.SimpleDateFormat
 import java.util.*
 
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {

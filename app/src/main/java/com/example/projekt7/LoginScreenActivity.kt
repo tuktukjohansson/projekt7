@@ -3,7 +3,6 @@ package com.example.projekt7
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -22,7 +21,7 @@ class LoginScreenActivity : AppCompatActivity() {
         supportActionBar?.hide()
         firebaseAuth = FirebaseAuth.getInstance()
         if (DataManager.auth.currentUser != null){
-            gotoActivity()
+            startActivity(Intent(this,ProfileScreenActivity::class.java))
         }
 
         textEmail = findViewById(R.id.editTextEmail)
@@ -32,8 +31,6 @@ class LoginScreenActivity : AppCompatActivity() {
         val buttonCreate = findViewById<Button>(R.id.buttonCreate)
 
         buttonLogin.setOnClickListener {
-            //buttonLogin.isEnabled = false
-            //loginUser()
             var email = textEmail.text.toString()
             var password = textPassword.text.toString()
             if(email.isEmpty() || password.isEmpty()){
@@ -42,9 +39,9 @@ class LoginScreenActivity : AppCompatActivity() {
             }
             DataManager.auth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener { task ->
-                    //buttonLogin.isEnabled = true
                     if(task.isSuccessful) {
-                        gotoActivity()
+                        startActivity(Intent(this,ProfileScreenActivity::class.java))
+                        finish()
                     } else {
                         Toast.makeText(
                             this, "Email or password is invalid. Authentication failed.",
@@ -55,15 +52,8 @@ class LoginScreenActivity : AppCompatActivity() {
             }
 
         buttonCreate.setOnClickListener {
-            val intent = Intent(this,ChooseUserActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this,CreateRUActivity::class.java))
         }
 
     }
-
-    fun gotoActivity() {
-            val userProfile = Intent(this, ProfileScreenActivity::class.java)
-            startActivity(userProfile)
-            finish()
-        }
 }
