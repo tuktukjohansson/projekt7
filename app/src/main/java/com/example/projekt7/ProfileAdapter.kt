@@ -17,8 +17,7 @@ data class ProfileAdapter(var spotMaps : ArrayList<Place>) : RecyclerView.Adapte
         val maps : Place = spotMaps[position]
         holder.titles.text = maps.title
         holder.descriptions.text = maps.description
-        holder.longitude.text = maps.longitude.toString()
-        holder.latitude.text = maps.latitude.toString()
+
 
     }
 
@@ -29,8 +28,8 @@ data class ProfileAdapter(var spotMaps : ArrayList<Place>) : RecyclerView.Adapte
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val titles : TextView = itemView.findViewById(R.id.umTitleLocation)
         val descriptions : TextView = itemView.findViewById(R.id.umDescription)
-        val longitude : TextView = itemView.findViewById(R.id.umLongitude)
-        val latitude : TextView = itemView.findViewById(R.id.umLatitude)
+//        val longitude : TextView = itemView.findViewById(R.id.umLongitude)
+//        val latitude : TextView = itemView.findViewById(R.id.umLatitude)
     }
 
 }
