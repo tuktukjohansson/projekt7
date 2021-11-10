@@ -38,11 +38,14 @@
         <entry key="app/src/main/res/layout/activity_rumaps.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_ruprofile.xml" value="0.2503725165755537" />
         <entry key="app/src/main/res/layout/activity_save_place.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_save_spot.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_upload_image.xml" value="0.335" />
         <entry key="app/src/main/res/layout/activity_user_profile.xml" value="0.34882016169269386" />
         <entry key="app/src/main/res/layout/dialog_create_map.xml" value="0.335" />
         <entry key="app/src/main/res/layout/dialog_create_place.xml" value="0.19805194805194806" />
+        <entry key="app/src/main/res/layout/dialog_share_place.xml" value="0.1734375" />
+        <entry key="app/src/main/res/layout/edit_delete_item.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_saved_spots.xml" value="0.18568840579710144" />
         <entry key="app/src/main/res/layout/fragment_shared_spots.xml" value="0.2826780907920122" />
         <entry key="app/src/main/res/layout/info_window_ru.xml" value="0.1" />
@@ -56,6 +59,7 @@
         <entry key="app/src/main/res/menu/map.xml" value="0.335" />
         <entry key="app/src/main/res/menu/menu_create_map.xml" value="0.2361111111111111" />
         <entry key="app/src/main/res/menu/menu_logout.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/menu/show_menu.xml" value="0.33" />
         <entry key="app/src/main/res/menu/user_navigator_menu.xml" value="0.28205128205128205" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3026041666666667" />
       </map>

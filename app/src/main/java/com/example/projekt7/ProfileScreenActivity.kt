@@ -40,9 +40,9 @@ class ProfileScreenActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         recyclerView.setHasFixedSize(true)
 
-        mapsList = arrayListOf()
+        mapsList = arrayListOf() // Troquei ver se nao da problema antes estava arrayOf()
 
-        profileAdapter = ProfileAdapter(mapsList)
+        profileAdapter = ProfileAdapter(mapsList,this)
         recyclerView.adapter = profileAdapter
 
         spotsListener()
