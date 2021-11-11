@@ -13,8 +13,6 @@ data class ProfileAdapter(var spotMaps : ArrayList<Place>,  val onClickListener:
         fun onItemClick(position: Int)
     }
 
-
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.usermaps_saved,parent,false)
         return ViewHolder(itemView)
@@ -28,7 +26,6 @@ data class ProfileAdapter(var spotMaps : ArrayList<Place>,  val onClickListener:
         holder.itemView.setOnClickListener{
             onClickListener.onItemClick(position)
         }
-
 
     }
 

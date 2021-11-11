@@ -21,14 +21,13 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var userMap: Place
 
     override fun onCreate(savedInstanceState: Bundle?) {
+        supportActionBar?.hide()
 
         userMap = intent.getSerializableExtra(EXTRA_USER_MAP) as Place
 
         super.onCreate(savedInstanceState)
         binding = ActivityDisplayMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
 
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
@@ -37,23 +36,13 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
-        Log.i("Map", "map to render")
+
+        val bounceBuilder = LatLngBounds.Builder()
+        if (userMap != null) {
+            val latLng = LatLng(userMap.latitude , userMap.longitude)
+            bounceBuilder.include(latLng)
+            mMap.addMarker(MarkerOptions().position(latLng).title(userMap.title).snippet(userMap.description))
+        }
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounceBuilder.build(), 9999,9999,2))
     }
 }
-
-
-
-
-/*
-
- val bounceBuilder = LatLngBounds.Builder()
-for (place in userMap) {
-            val latLng = LatLng(place.latitude , place.longitude)
-            bounceBuilder.include(latLng)
-            mMap.addMarker(MarkerOptions().position(latLng).title(place.title).snippet(place.description))
-        }
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounceBuilder.build(), 1000,1000,0))
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounceBuilder.build(), 1000,1000,0))
-    }
-
- */
