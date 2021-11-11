@@ -7,7 +7,14 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.projekt7.Model.Place
 
-data class ProfileAdapter(var spotMaps : ArrayList<Place>) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
+data class ProfileAdapter(var spotMaps : ArrayList<Place>,  val onClickListener: OnClickListener) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
+
+    interface OnClickListener {
+        fun onItemClick(position: Int)
+    }
+
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val itemView = LayoutInflater.from(parent.context).inflate(R.layout.usermaps_saved,parent,false)
         return ViewHolder(itemView)
@@ -17,6 +24,10 @@ data class ProfileAdapter(var spotMaps : ArrayList<Place>) : RecyclerView.Adapte
         val maps : Place = spotMaps[position]
         holder.titles.text = maps.title
         holder.descriptions.text = maps.description
+
+        holder.itemView.setOnClickListener{
+            onClickListener.onItemClick(position)
+        }
 
 
     }
@@ -30,6 +41,10 @@ data class ProfileAdapter(var spotMaps : ArrayList<Place>) : RecyclerView.Adapte
         val descriptions : TextView = itemView.findViewById(R.id.umDescription)
 //        val longitude : TextView = itemView.findViewById(R.id.umLongitude)
 //        val latitude : TextView = itemView.findViewById(R.id.umLatitude)
+        val placePosition = 0
+
+
+
     }
 
 }
