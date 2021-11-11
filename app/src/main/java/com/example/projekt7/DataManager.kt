@@ -10,7 +10,7 @@ import com.google.firebase.ktx.Firebase
 object DataManager {
     val TAG = "!!!"
     var auth = Firebase.auth
-    val db = Firebase.firestore
+    var db = Firebase.firestore
 
     var regularUserList = mutableListOf<RegularUser>()
     var businessOwnerList = mutableListOf<BusinessOwner>()

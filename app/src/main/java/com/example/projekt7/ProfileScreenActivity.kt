@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,8 +13,15 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.firebase.firestore.*
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
- val EXTRA_USER_MAP = "EXTRA_USER_MAP"
+val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
 private const val REQUEST_CODE = 1234
 
@@ -26,6 +34,10 @@ class ProfileScreenActivity : AppCompatActivity() {
     private lateinit var mapsList: ArrayList<Place>
     private lateinit var db: FirebaseFirestore
     private lateinit var profileAdapter: ProfileAdapter
+    private val placesCollectionRef = Firebase.firestore.collection("places")
+    private lateinit var etTitle : EditText
+    private lateinit var etDescription :EditText
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -91,4 +103,53 @@ class ProfileScreenActivity : AppCompatActivity() {
                 }
             })
     }
+
+    // funcoes para o Adaptar DATA
+/*
+    private fun getOldPlace(): Place {
+        val title = etTitle.text.toString()
+        val description = etDescription.text.toString()
+        return Place(title, description)
+    }
+*/
+  /*  private fun getNewPlaceMap(): Map<String, Any> {
+        val title = etTitle.text.toString()
+        val description = etDescription.text.toString()
+
+        val map = mutableMapOf<String, Any>()
+        if(title.isNotEmpty()) {
+            map["title"] = title
+        }
+        if(description.isNotEmpty()) {
+            map["description"] = description
+        }
+        return map
+    } */
+
+   /* private fun subscribeToRealtimeUpdates() {
+        placesCollectionRef.addSnapshotListener { querySnapshot, firebaseFirestoreException ->
+            firebaseFirestoreException?.let {
+                Toast.makeText(this, it.message, Toast.LENGTH_LONG).show()
+                return@addSnapshotListener
+            }
+            querySnapshot?.let {
+                val sb = StringBuilder()
+                for(document in it) {
+                    val place = document.toObject<Place>()
+                    sb.append("$place\n")
+                }
+
+            }
+        }
+    } */
+
+
+
+
+
+
+
+
+
+
 }

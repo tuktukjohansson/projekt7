@@ -3,15 +3,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@drawable/gratiente_splash"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvProfileScreen"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="52dp" />
+        android:layout_width="411dp"
+        android:layout_height="589dp"
+        android:layout_marginTop="62dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fabSignOut"
@@ -20,6 +25,7 @@
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="35dp"
         android:clickable="true"
+        android:backgroundTint="#C60D0D"
         app:layout_constraintBottom_toTopOf="@+id/fabCreateButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_sign_out"
@@ -32,9 +38,26 @@
         android:layout_marginEnd="35dp"
         android:layout_marginBottom="35dp"
         android:clickable="true"
+        android:backgroundTint="#C60D0D"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:srcCompat="@drawable/ic_add_location"
         tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="128dp"
+        android:layout_marginTop="53dp"
+        android:layout_marginEnd="129dp"
+        android:text="MY FAVOURITE SPOTS:"
+        android:textColor="@color/black"
+        android:textSize="20dp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.479"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

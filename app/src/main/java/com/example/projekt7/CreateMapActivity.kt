@@ -4,6 +4,7 @@ import android.app.Activity
 import android.app.ProgressDialog
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -15,6 +16,7 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.projekt7.Model.Place
 import com.example.projekt7.Model.UserMap
@@ -31,11 +33,13 @@ import com.google.firebase.firestore.*
 import com.google.firebase.firestore.EventListener
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
-import java.util.*
+import java.util.jar.Manifest
 
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private lateinit var mMap: GoogleMap
+
+    private val REQUEST_LOCATION_PERMISSION = 1
 
     private lateinit var binding: ActivityCreateMapBinding
     val mapsList = arrayListOf<Place>()
@@ -70,7 +74,10 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val showMapsAdapter = ShowMapsAdapter(this)
         mMap.setInfoWindowAdapter(showMapsAdapter)
         spotsListener()
+       // enableMyLocation()
+
     }
+
 
 
     private fun showAlertDialog(latLng: LatLng) {
@@ -78,7 +85,6 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         val dialog = AlertDialog.Builder(this)
             .setTitle("Save a spot")
             .setView(placeFormView)
-            .setNeutralButton("Upload image", null)
             .setNegativeButton("Cancel", null)
             .setPositiveButton("OK", null).show()
 
@@ -138,5 +144,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             mark.tag = place
         }
     }
+
+
 
 }
