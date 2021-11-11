@@ -62,19 +62,13 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         spotsListener()
     }
 
-
     private fun showAlertDialog(latLng: LatLng) {
         val placeFormView = LayoutInflater.from(this).inflate(R.layout.dialog_create_place, null)
         val dialog = AlertDialog.Builder(this)
             .setTitle("Save a spot")
             .setView(placeFormView)
-            .setNeutralButton("Upload image", null)
             .setNegativeButton("Cancel", null)
             .setPositiveButton("OK", null).show()
-
-        dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener {
-
-        }
 
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
             val title = placeFormView.findViewById<EditText>(R.id.etTitle).text.toString()

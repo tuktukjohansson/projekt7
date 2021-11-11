@@ -42,7 +42,13 @@ class ProfileScreenActivity : AppCompatActivity() {
 
         mapsList = arrayListOf()
 
-        profileAdapter = ProfileAdapter(mapsList)
+        profileAdapter = ProfileAdapter(mapsList, object : ProfileAdapter.OnClickListener {
+            override fun onItemClick(position: Int) {
+                val intent = Intent(this@ProfileScreenActivity, DisplayMapsActivity::class.java)
+                intent.putExtra(EXTRA_USER_MAP, mapsList[position])
+                startActivity(intent)
+            }
+        })
         recyclerView.adapter = profileAdapter
 
         spotsListener()
