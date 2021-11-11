@@ -39,12 +39,8 @@ data class ProfileAdapter(var spotMaps : ArrayList<Place>,  val onClickListener:
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         val titles : TextView = itemView.findViewById(R.id.umTitleLocation)
         val descriptions : TextView = itemView.findViewById(R.id.umDescription)
-//        val longitude : TextView = itemView.findViewById(R.id.umLongitude)
+//       val longitude : TextView = itemView.findViewById(R.id.umLongitude)
 //        val latitude : TextView = itemView.findViewById(R.id.umLatitude)
-        val placePosition = 0
-
-
-
     }
 
 }

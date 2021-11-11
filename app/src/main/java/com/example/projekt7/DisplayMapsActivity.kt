@@ -3,11 +3,16 @@ package com.example.projekt7
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import com.example.projekt7.Model.Place
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.example.projekt7.databinding.ActivityDisplayMapsBinding
+import com.google.android.gms.maps.CameraUpdateFactory
+import com.google.android.gms.maps.model.LatLng
+import com.google.android.gms.maps.model.LatLngBounds
+import com.google.android.gms.maps.model.MarkerOptions
 
 class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -16,6 +21,9 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
     private lateinit var userMap: Place
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        userMap = intent.getSerializableExtra(EXTRA_USER_MAP) as Place
+
         super.onCreate(savedInstanceState)
         binding = ActivityDisplayMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -29,10 +37,17 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
     override fun onMapReady(googleMap: GoogleMap) {
         mMap = googleMap
+        Log.i("Map", "map to render")
+    }
+}
 
-//        val bounceBuilder = LatLngBounds.Builder()
 
-        /*for (place in userMap.places) {
+
+
+/*
+
+ val bounceBuilder = LatLngBounds.Builder()
+for (place in userMap) {
             val latLng = LatLng(place.latitude , place.longitude)
             bounceBuilder.include(latLng)
             mMap.addMarker(MarkerOptions().position(latLng).title(place.title).snippet(place.description))
@@ -41,6 +56,4 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
 //        mMap.animateCamera(CameraUpdateFactory.newLatLngBounds(bounceBuilder.build(), 1000,1000,0))
     }
 
-         */
-    }
-}
+ */
