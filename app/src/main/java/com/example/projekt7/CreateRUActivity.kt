@@ -48,9 +48,15 @@ class CreateRUActivity : AppCompatActivity() {
 
 
             DataManager.createRU(mailString,passwordString)
+
+            if(mailString.isEmpty() || passwordString.isEmpty()){
+            Toast.makeText(applicationContext,"Please fill all the information to create an account", Toast.LENGTH_SHORT).show()
+            return@setOnClickListener
+        }
             Toast.makeText(applicationContext,"Account created !", Toast.LENGTH_SHORT).show()
             val intent = Intent(this, LoginScreenActivity::class.java)
             startActivity(intent)
+
         }
     }
 

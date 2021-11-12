@@ -19,7 +19,7 @@ import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
 
-private const val TAG = "Display"
+const val TAG = "Display"
 class UploadImageActivity : AppCompatActivity() {
 
       lateinit var binding : ActivityUploadImageBinding

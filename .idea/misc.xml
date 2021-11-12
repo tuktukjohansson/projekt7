@@ -58,12 +58,13 @@
         <entry key="app/src/main/res/layout/show_snippet.xml" value="0.335" />
         <entry key="app/src/main/res/layout/snippet_dialog.xml" value="0.335" />
         <entry key="app/src/main/res/layout/user_maps_saved.xml" value="0.335" />
-        <entry key="app/src/main/res/layout/usermaps_saved.xml" value="0.335" />
+        <entry key="app/src/main/res/layout/usermaps_saved.xml" value="0.2033898305084746" />
         <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.28205128205128205" />
         <entry key="app/src/main/res/menu/create_map.xml" value="0.17777777777777778" />
         <entry key="app/src/main/res/menu/map.xml" value="0.335" />
         <entry key="app/src/main/res/menu/menu_create_map.xml" value="0.2361111111111111" />
         <entry key="app/src/main/res/menu/menu_logout.xml" value="0.21574074074074073" />
+        <entry key="app/src/main/res/menu/show_menu.xml" value="0.1" />
         <entry key="app/src/main/res/menu/user_navigator_menu.xml" value="0.28205128205128205" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.3026041666666667" />
       </map>

@@ -44,7 +44,7 @@ class LoginScreenActivity : AppCompatActivity() {
                         finish()
                     } else {
                         Toast.makeText(
-                            this, "Email or password is invalid. Authentication failed.",
+                            this, "Email or password is invalid.",
                             Toast.LENGTH_SHORT).show()
                     }
                 }
