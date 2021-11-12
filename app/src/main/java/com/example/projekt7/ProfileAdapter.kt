@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.projekt7.DataManager.db
 import com.example.projekt7.Model.Place
 
-data class ProfileAdapter(var spotMaps: ArrayList<Place>, val c: Context, val onClickListener: OnClickListener) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
+data class ProfileAdapter(var spotMaps: ArrayList<Place>, val onClickListener: OnClickListener) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
 
     interface OnClickListener {
         fun onItemClick(position: Int)
@@ -40,19 +40,19 @@ data class ProfileAdapter(var spotMaps: ArrayList<Place>, val c: Context, val on
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
         var titles : TextView = itemView.findViewById(R.id.umTitleLocation)
         var descriptions : TextView = itemView.findViewById(R.id.umDescription)
-        var mMenus : ImageView
-        var itemPosition = 0
+        //var mMenus : ImageView
+       // var itemPosition = 0
 //       val longitude : TextView = itemView.findViewById(R.id.umLongitude)
 //        val latitude : TextView = itemView.findViewById(R.id.umLatitude)
 
         init {
             titles = itemView.findViewById(R.id.umTitleLocation)
             descriptions = itemView.findViewById(R.id.umDescription)
-            mMenus = itemView.findViewById(R.id.mMenus)
-            mMenus.setOnClickListener { popupMenus(it) }
+           // mMenus = itemView.findViewById(R.id.mMenus)
+           // mMenus.setOnClickListener { popupMenus(it) }
         }
     }
-
+/*
     private fun popupMenus(itemView: View) {
         //val itemViewHolder = itemView as ViewHolder
         // Log.d("!!!", "${itemViewHolder.itemPosition} " )
@@ -70,7 +70,6 @@ data class ProfileAdapter(var spotMaps: ArrayList<Place>, val c: Context, val on
                         .setPositiveButton("Yes") {
                                 dialog,_->
                             spotMaps.removeAt(0) // O Erro está aqui
-
                             notifyDataSetChanged()
                             Toast.makeText(c,"Delete this place", Toast.LENGTH_SHORT).show()
                             dialog.dismiss()
@@ -98,13 +97,14 @@ data class ProfileAdapter(var spotMaps: ArrayList<Place>, val c: Context, val on
             .invoke(menu,true)
     }
 
-    private fun deletePlace() {
-        db.collection("places")
-            .document("Spot1")
+ */
+
+  /* private fun deletePlace() {
+        db.collection("places").document("Spot1")
             .delete()
             .addOnSuccessListener { Log.d(TAG, "PLace successfully deleted!") }
             .addOnFailureListener { e -> Log.w(TAG, "Error deleting place", e) }
     }
-
+*/
 
 }
