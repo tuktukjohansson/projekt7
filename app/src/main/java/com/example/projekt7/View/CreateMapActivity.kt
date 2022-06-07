@@ -25,9 +25,7 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.*
 
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
-
     private lateinit var mMap: GoogleMap
-
     private lateinit var binding: ActivityCreateMapBinding
     val mapsList = arrayListOf<Place>()
 
@@ -75,6 +73,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
             val title = placeFormView.findViewById<EditText>(R.id.etTitle).text.toString()
             val description =
                 placeFormView.findViewById<EditText>(R.id.etDescription).text.toString()
+
             if (title.trim().isEmpty() || description.trim().isEmpty()) {
                 Toast.makeText(
                     this,
@@ -83,11 +82,14 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 ).show()
                 return@setOnClickListener
             }
-            val marker = mMap.addMarker(MarkerOptions().position(latLng).title(title).snippet(description))
+
+            val marker =
+                mMap.addMarker(MarkerOptions().position(latLng).title(title).snippet(description))
             if (marker != null) {
                 val place = Place(title, description, latLng.latitude, latLng.longitude)
                 DataManager.db.collection("places").add(place)
             }
+
             dialog.dismiss()
             startActivity(Intent(this, ProfileScreenActivity::class.java))
             finish()
@@ -116,12 +118,11 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
     }
 
 
-    fun createMarkers(){
-        for(place in mapsList){
+    fun createMarkers() {
+        for (place in mapsList) {
             val position = LatLng(place.latitude, place.longitude)
             val mark = mMap.addMarker(MarkerOptions().position(position))
             mark.tag = place
         }
     }
-
 }

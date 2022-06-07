@@ -1,4 +1,3 @@
-
 package com.example.projekt7.View
 
 import android.os.Bundle
@@ -15,7 +14,6 @@ import com.google.android.gms.maps.model.LatLngBounds
 import com.google.android.gms.maps.model.MarkerOptions
 
 class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
-
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityDisplayMapsBinding
     private lateinit var userMap: Place
@@ -38,11 +36,11 @@ class DisplayMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         val bounceBuilder = LatLngBounds.Builder()
-        if (userMap != null) {
-            val latLng = LatLng(userMap.latitude , userMap.longitude)
-            bounceBuilder.include(latLng)
-            mMap.addMarker(MarkerOptions().position(latLng).title(userMap.title).snippet(userMap.description))
-        }
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounceBuilder.build(), 9999,9999,2))
+        val latLng = LatLng(userMap.latitude, userMap.longitude)
+        bounceBuilder.include(latLng)
+        mMap.addMarker(
+            MarkerOptions().position(latLng).title(userMap.title).snippet(userMap.description)
+        )
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bounceBuilder.build(), 9999, 9999, 2))
     }
 }

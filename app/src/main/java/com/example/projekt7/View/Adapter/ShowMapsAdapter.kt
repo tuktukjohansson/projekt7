@@ -30,6 +30,4 @@ class ShowMapsAdapter(val context: Context) : GoogleMap.InfoWindowAdapter {
     override fun getInfoContents(p0: Marker): View? {
         return null
     }
-
-
 }

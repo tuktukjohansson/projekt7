@@ -15,20 +15,13 @@ import com.example.projekt7.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.*
 
- val EXTRA_USER_MAP = "EXTRA_USER_MAP"
-const val EXTRA_MAP_TITLE = "EXTRA_MAP_TITLE"
-private const val REQUEST_CODE = 1234
+const val EXTRA_USER_MAP = "EXTRA_USER_MAP"
 
 class ProfileScreenActivity : AppCompatActivity() {
-
-    /*    private lateinit var mapAdapter: MapsAdapter
-    private lateinit var rvMaps: RecyclerView
-*/
     private lateinit var recyclerView: RecyclerView
     private lateinit var mapsList: ArrayList<Place>
     private lateinit var db: FirebaseFirestore
     private lateinit var profileAdapter: ProfileAdapter
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,19 +50,6 @@ class ProfileScreenActivity : AppCompatActivity() {
 
         spotsListener()
 
-
-
-/*               mapsAdapter = MapsAdapter(this, object : MapsAdapter.OnClickListener {
-            override fun onItemClick(position: Int) {
-                val intent = Intent(this@ProfileScreenActivity, DisplayMapsActivity::class.java)
-                intent.putExtra(EXTRA_USER_MAP, mapsList[position])
-                startActivity(intent)
-            }
-        })
-*/
-
-
-
         fabCreateMap.setOnClickListener {
             startActivity(Intent(this, CreateMapActivity::class.java))
         }
@@ -80,7 +60,6 @@ class ProfileScreenActivity : AppCompatActivity() {
             Toast.makeText(this, "Signed out!", Toast.LENGTH_SHORT).show()
             finish()
         }
-
     }
 
     private fun spotsListener() {
