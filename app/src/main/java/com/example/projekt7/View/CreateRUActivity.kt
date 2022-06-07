@@ -24,16 +24,16 @@ class CreateRUActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        createUserButton.setOnClickListener() {
+        createUserButton.setOnClickListener {
             nameEditText = findViewById(R.id.businessName)
             mailEditText = findViewById(R.id.editTextMail)
             userNameEditText = findViewById(R.id.editTextUserName)
             passwordEditText = findViewById(R.id.editTextPassword)
 
-            val nameString = nameEditText.getText().toString()
-            val mailString = mailEditText.getText().toString()
-            val userNameString = userNameEditText.getText().toString()
-            val passwordString = passwordEditText.getText().toString()
+            val nameString = nameEditText.text.toString()
+            val mailString = mailEditText.text.toString()
+            val userNameString = userNameEditText.text.toString()
+            val passwordString = passwordEditText.text.toString()
 
             val newRegularUser = RegularUser(
                 nameString,
@@ -43,6 +43,7 @@ class CreateRUActivity : AppCompatActivity() {
             )
 
             DataManager.regularUserList.add(newRegularUser)
+            DataManager.createNewUser(newRegularUser, mailString, passwordString)
 
             //Nedan är lite check i LogCat på att alla uppgifter sparats
             val printNewUser = DataManager.regularUserList[DataManager.regularUserList.lastIndex]
@@ -52,7 +53,6 @@ class CreateRUActivity : AppCompatActivity() {
             Log.d(TAG, "New username: ${printNewUser.userName}")
             Log.d(TAG, "New user password: ${printNewUser.password}")
 
-            DataManager.createRU(mailString, passwordString)
 
             if (mailString.isEmpty() || passwordString.isEmpty()) {
                 Toast.makeText(

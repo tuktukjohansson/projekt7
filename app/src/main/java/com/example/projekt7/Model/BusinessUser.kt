@@ -1,6 +1,6 @@
 package com.example.projekt7.Model
 
-class BusinessOwner(
+class BusinessUser(
     var name: String,
     var business: String,
     var adressStreet: String,

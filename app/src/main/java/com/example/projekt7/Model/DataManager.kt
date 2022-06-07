@@ -8,66 +8,36 @@ import com.google.firebase.ktx.Firebase
 const val TAG = "!!!"
 
 object DataManager {
-    var auth = Firebase.auth
-    val db = Firebase.firestore
-
     var regularUserList = mutableListOf<RegularUser>()
-    var businessOwnerList = mutableListOf<BusinessOwner>()
+    var businessUserList = mutableListOf<BusinessUser>()
+    var auth = Firebase.auth
 
-    fun createRU(mailString: String, passwordString: String) {
-        if (mailString.isEmpty() || passwordString.isEmpty()) {
-            return
-        }
+    fun createNewUser(userObject: Any, email: String, password: String) {
+        if (email.isEmpty() || password.isEmpty()) return
 
-        auth.createUserWithEmailAndPassword(mailString, passwordString)
+        auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
                     Log.d(TAG, "createUser: Success")
-                    auth.signInWithEmailAndPassword(mailString, passwordString)
-                    addRegularData(regularUserList[regularUserList.lastIndex])
-                    auth.signOut()
+
+                    auth.signInWithEmailAndPassword(email, password)
+                        .addOnSuccessListener {
+                            addUserToFirebase(userObject)
+                        }
                 } else {
                     Log.d(TAG, "createUser: user not created ${task.exception}")
                 }
             }
     }
 
-    fun createBO(mailString: String, passwordString: String) {
+    private fun addUserToFirebase(userObject: Any) {
+        val db = Firebase.firestore
 
-        if (mailString.isEmpty() || passwordString.isEmpty()) {
-            return
-        }
-
-        auth.createUserWithEmailAndPassword(mailString, passwordString)
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    Log.d(TAG, "createUser: Success")
-                    auth.signInWithEmailAndPassword(mailString, passwordString)
-                    addBusinessData(businessOwnerList[businessOwnerList.lastIndex])
-                    auth.signOut()
-                } else {
-                    Log.d(TAG, "createUser: user not created ${task.exception}")
-                }
-            }
-    }
-
-    fun addBusinessData(businessOwner: BusinessOwner) {
-        val user = auth.currentUser ?: return
-
-        db.collection("users").document(user.uid)
-            .collection("data").add(businessOwner)
+        db.collection("users").document(auth.currentUser!!.uid)
+            .collection("data").add(userObject)
             .addOnCompleteListener {
                 Log.d("!!!", "saveItem: add: ${it.exception}")
-            }
-    }
-
-    fun addRegularData(regularUser: RegularUser) {
-        val user = auth.currentUser ?: return
-
-        db.collection("users").document(user.uid)
-            .collection("data").add(regularUser)
-            .addOnCompleteListener {
-                Log.d("!!!", "saveItem: add: ${it.exception}")
+                auth.signOut()
             }
     }
 }
