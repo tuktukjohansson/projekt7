@@ -1,4 +1,4 @@
-package com.example.projekt7
+package com.example.projekt7.View
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,6 +7,9 @@ import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.projekt7.Model.BusinessOwner
+import com.example.projekt7.Model.DataManager
+import com.example.projekt7.R
 
 class CreateBOActivity : AppCompatActivity() {
     lateinit var nameEditText: EditText

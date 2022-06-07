@@ -1,15 +1,12 @@
-package com.example.projekt7
+package com.example.projekt7.View.Adapter
 
-import android.app.AlertDialog
-import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.recyclerview.widget.RecyclerView
-import com.example.projekt7.DataManager.db
 import com.example.projekt7.Model.Place
+import com.example.projekt7.R
 
 data class ProfileAdapter(var spotMaps: ArrayList<Place>, val onClickListener: OnClickListener) : RecyclerView.Adapter<ProfileAdapter.ViewHolder>() {
 

@@ -1,4 +1,4 @@
-package com.example.projekt7
+package com.example.projekt7.View
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import com.example.projekt7.Model.DataManager
+import com.example.projekt7.R
 import com.google.firebase.auth.FirebaseAuth
 
 class LoginScreenActivity : AppCompatActivity() {
@@ -21,7 +23,7 @@ class LoginScreenActivity : AppCompatActivity() {
         supportActionBar?.hide()
         firebaseAuth = FirebaseAuth.getInstance()
         if (DataManager.auth.currentUser != null){
-            startActivity(Intent(this,ProfileScreenActivity::class.java))
+            startActivity(Intent(this, ProfileScreenActivity::class.java))
         }
 
         textEmail = findViewById(R.id.editTextEmail)
@@ -40,7 +42,7 @@ class LoginScreenActivity : AppCompatActivity() {
             DataManager.auth.signInWithEmailAndPassword(email,password)
                 .addOnCompleteListener { task ->
                     if(task.isSuccessful) {
-                        startActivity(Intent(this,ProfileScreenActivity::class.java))
+                        startActivity(Intent(this, ProfileScreenActivity::class.java))
                         finish()
                     } else {
                         Toast.makeText(
@@ -52,7 +54,7 @@ class LoginScreenActivity : AppCompatActivity() {
             }
 
         buttonCreate.setOnClickListener {
-            startActivity(Intent(this,CreateRUActivity::class.java))
+            startActivity(Intent(this, CreateRUActivity::class.java))
         }
 
     }

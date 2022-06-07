@@ -1,27 +1,28 @@
-package com.example.projekt7
+package com.example.projekt7.View
 
 import android.content.DialogInterface
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.example.projekt7.Model.DataManager
 import com.example.projekt7.Model.Place
+import com.example.projekt7.R
+import com.example.projekt7.View.Adapter.ShowMapsAdapter
+import com.example.projekt7.databinding.ActivityCreateMapBinding
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
-import com.example.projekt7.databinding.ActivityCreateMapBinding
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.firestore.*
-import com.google.firebase.firestore.EventListener
-import java.util.*
 
 class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -88,7 +89,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
                 DataManager.db.collection("places").add(place)
             }
             dialog.dismiss()
-            startActivity(Intent(this,ProfileScreenActivity::class.java))
+            startActivity(Intent(this, ProfileScreenActivity::class.java))
             finish()
         }
     }

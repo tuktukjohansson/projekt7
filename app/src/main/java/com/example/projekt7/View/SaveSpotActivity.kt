@@ -1,4 +1,4 @@
-package com.example.projekt7
+package com.example.projekt7.View
 
 import android.app.Activity
 import android.content.Intent
@@ -9,6 +9,7 @@ import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
+import com.example.projekt7.R
 
 private const val PICK_PHOTO_CODE = 1234
 

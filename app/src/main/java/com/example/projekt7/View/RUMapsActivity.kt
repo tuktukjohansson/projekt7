@@ -1,13 +1,12 @@
-package com.example.projekt7
+package com.example.projekt7.View
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.projekt7.R
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap

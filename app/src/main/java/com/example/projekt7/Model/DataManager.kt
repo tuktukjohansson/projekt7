@@ -1,4 +1,4 @@
-package com.example.projekt7
+package com.example.projekt7.Model
 
 import android.util.Log
 import com.google.firebase.auth.ktx.auth
@@ -63,7 +63,7 @@ object DataManager {
             }
 
     }
-    fun addRegularData(regularUser:RegularUser){
+    fun addRegularData(regularUser: RegularUser){
         val user = auth.currentUser
         if (user == null)
             return
