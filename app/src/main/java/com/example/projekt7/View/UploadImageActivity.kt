@@ -3,12 +3,11 @@ package com.example.projekt7.View
 import android.app.ProgressDialog
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
-import com.example.projekt7.Model.DataManager
+import androidx.appcompat.app.AppCompatActivity
 import com.example.projekt7.Model.Place
 import com.example.projekt7.R
 import com.example.projekt7.databinding.ActivityUploadImageBinding
@@ -16,6 +15,8 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import java.text.SimpleDateFormat
 import java.util.*
@@ -50,6 +51,8 @@ class UploadImageActivity : AppCompatActivity() {
     private fun savePlace() {
         val title = findViewById<EditText>(R.id.textTitle).text.toString()
         val description = findViewById<EditText>(R.id.textDescription).text.toString()
+        val db = Firebase.firestore
+
         if (title.trim().isEmpty() || description.trim().isEmpty()) {
             Toast.makeText(
                 this,
@@ -64,7 +67,7 @@ class UploadImageActivity : AppCompatActivity() {
             markers.add(marker)
             // uploadImage()
             val place = Place(title, description, latLng.latitude, latLng.longitude)
-            DataManager.db.collection("places").add(place)
+            db.collection("places").add(place)
         }
         return
     }

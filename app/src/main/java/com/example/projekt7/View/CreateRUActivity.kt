@@ -45,11 +45,11 @@ class CreateRUActivity : AppCompatActivity() {
             DataManager.regularUserList.add(newRegularUser)
             DataManager.createNewUser(newRegularUser, mailString, passwordString)
 
-            //Nedan är lite check i LogCat på att alla uppgifter sparats
+            // Nedan är lite check i LogCat på att alla uppgifter sparats
             val printNewUser = DataManager.regularUserList[DataManager.regularUserList.lastIndex]
             Log.d(TAG, "${DataManager.regularUserList.lastIndex}")
             Log.d(TAG, "New user name: ${printNewUser.name}")
-            Log.d(TAG, "New user mail: ${printNewUser.mail}")
+            Log.d(TAG, "New user mail: ${printNewUser.email}")
             Log.d(TAG, "New username: ${printNewUser.userName}")
             Log.d(TAG, "New user password: ${printNewUser.password}")
 

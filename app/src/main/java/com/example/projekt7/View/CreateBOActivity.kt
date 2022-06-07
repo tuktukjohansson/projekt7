@@ -57,15 +57,15 @@ class CreateBOActivity : AppCompatActivity() {
             DataManager.businessUserList.add(newBusinessOwner)
             DataManager.createNewUser(newBusinessOwner, mailString, passwordString)
 
-            //Nedan är lite check i LogCat på att alla uppgifter sparats
+            // Nedan är lite check i LogCat på att alla uppgifter sparats
             val printNewUser = DataManager.businessUserList[DataManager.businessUserList.lastIndex]
             Log.d(TAG, "${DataManager.businessUserList.lastIndex}")
             Log.d(TAG, "New user name: ${printNewUser.name}")
             Log.d(TAG, "New user business: ${printNewUser.business}")
-            Log.d(TAG, "New user street: ${printNewUser.adressStreet}")
+            Log.d(TAG, "New user street: ${printNewUser.addressStreet}")
             Log.d(TAG, "New user zipcode: ${printNewUser.townZipCode}")
             Log.d(TAG, "New user phone: ${printNewUser.phone}")
-            Log.d(TAG, "New user mail: ${printNewUser.mail}")
+            Log.d(TAG, "New user mail: ${printNewUser.email}")
             Log.d(TAG, "New user password: ${printNewUser.password}")
 
             val intent = Intent(this, LoginScreenActivity::class.java)
