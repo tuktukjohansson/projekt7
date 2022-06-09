@@ -3,6 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_boprofile.xml" value="0.5234375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_choose_user.xml" value="0.5234375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_create_boactivity.xml" value="0.5234375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_create_map.xml" value="0.4484375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_create_ruactivity.xml" value="0.5234375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_display_maps.xml" value="0.4484375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_login_screen.xml" value="0.43125" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_main.xml" value="0.5234375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_profile_screen.xml" value="0.32447916666666665" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_rumaps.xml" value="0.5234375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_save_spot.xml" value="0.5234375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_splash.xml" value="0.5234375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/activity_upload_image.xml" value="0.5234375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/dialog_create_place.xml" value="0.4484375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/snippet_dialog.xml" value="0.4484375" />
+        <entry key="..\:/Users/ExozT/StudioProjects/projekt7/app/src/main/res/layout/usermaps_saved.xml" value="0.4484375" />
         <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.29794871794871797" />
         <entry key="app/src/main/res/drawable/button_create.xml" value="0.22962962962962963" />
         <entry key="app/src/main/res/drawable/button_login.xml" value="0.22962962962962963" />

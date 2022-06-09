@@ -19,10 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Projekt7">
         <activity
-            android:name=".SaveSpotActivity"
-            android:exported="false" />
-        <activity
-            android:name=".MainActivity"
+            android:name=".View.SaveSpotActivity"
             android:exported="false" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -37,43 +34,37 @@
             android:value="AIzaSyCHs6x4ABggCDaAZHM42HMLDwmAx24aLV0" />
 
         <activity
-            android:name=".CreateMapActivity"
+            android:name=".View.CreateMapActivity"
             android:exported="false"
             android:label="@string/title_activity_create_map" />
         <activity
-            android:name=".DisplayMapsActivity"
+            android:name=".View.DisplayMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_display_maps" />
         <activity
-            android:name=".UploadImageActivity"
+            android:name=".View.UploadImageActivity"
             android:exported="false" />
         <activity
-            android:name=".ProfileScreenActivity"
+            android:name=".View.ProfileScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".RUMapsActivity"
+            android:name=".View.RUMapsActivity"
             android:exported="false"
             android:label="@string/title_activity_rumaps" />
         <activity
-            android:name=".LoginScreenActivity"
+            android:name=".View.LoginScreenActivity"
             android:exported="false" />
         <activity
-            android:name=".BOProfileActivity"
+            android:name=".View.CreateBOActivity"
             android:exported="false" />
         <activity
-            android:name=".CreateBOActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CreateRUActivity"
+            android:name=".View.CreateRUActivity"
             android:exported="true" />
         <activity
-            android:name=".ChooseUserActivity"
+            android:name=".View.ChooseUserActivity"
             android:exported="false" />
         <activity
-            android:name=".SavePlaceActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SplashActivity"
+            android:name=".View.SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

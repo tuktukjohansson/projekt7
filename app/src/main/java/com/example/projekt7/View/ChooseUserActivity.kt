@@ -1,12 +1,10 @@
-package com.example.projekt7
+package com.example.projekt7.View
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
-import com.example.projekt7.DataManager.TAG
-import com.google.android.gms.tasks.OnSuccessListener
+import com.example.projekt7.R
 
 class ChooseUserActivity : AppCompatActivity() {
 
@@ -20,13 +18,13 @@ class ChooseUserActivity : AppCompatActivity() {
         val regularUser = findViewById<Button>(R.id.buttonRegularUser)
 
         businessOwner.setOnClickListener {
-            val intent = Intent(this,CreateBOActivity::class.java)
+            val intent = Intent(this, CreateBOActivity::class.java)
             startActivity(intent)
         }
 
         regularUser.setOnClickListener {
-            val ruCreate = Intent(this,CreateRUActivity::class.java)
+            val ruCreate = Intent(this, CreateRUActivity::class.java)
             startActivity(ruCreate)
-        }  
+        }
     }
 }

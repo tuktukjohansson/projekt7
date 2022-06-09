@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ProfileScreenActivity"
+    tools:context=".View.ProfileScreenActivity"
     android:background="@drawable/gardient_background">
 
     <androidx.recyclerview.widget.RecyclerView

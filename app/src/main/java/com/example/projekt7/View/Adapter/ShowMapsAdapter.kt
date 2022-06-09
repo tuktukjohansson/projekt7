@@ -1,11 +1,11 @@
-package com.example.projekt7
+package com.example.projekt7.View.Adapter
 
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.EditText
 import android.widget.TextView
 import com.example.projekt7.Model.Place
+import com.example.projekt7.R
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 
@@ -30,6 +30,4 @@ class ShowMapsAdapter(val context: Context) : GoogleMap.InfoWindowAdapter {
     override fun getInfoContents(p0: Marker): View? {
         return null
     }
-
-
 }

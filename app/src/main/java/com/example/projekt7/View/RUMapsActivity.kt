@@ -1,14 +1,12 @@
-package com.example.projekt7
+package com.example.projekt7.View
 
 import android.Manifest
-import android.content.Intent
 import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-
+import com.example.projekt7.R
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
@@ -22,10 +20,8 @@ import com.google.firebase.ktx.Firebase
 import java.util.*
 
 class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
-
     private lateinit var mMap: GoogleMap
     private lateinit var binding: ActivityRumapsBinding
-
     private val REQUEST_LOCATION_PERMISSION = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +34,6 @@ class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-
     }
 
     /**
@@ -54,7 +49,6 @@ class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap = googleMap
 
         // Home Location if I dont want to add user current location
-
         val latitude = 59.3293
         val longitude = 18.0686
         val zoomLevel = 15f
@@ -63,86 +57,90 @@ class RUMapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(homeLatLng, zoomLevel))
         mMap.addMarker(MarkerOptions().position(homeLatLng))
 
-
         // functions
         setMapLongClick(mMap)
         setPoiClick(mMap)
         enableMyLocation()
-
-
     }
 
-    private fun setMapLongClick(map:GoogleMap) {
+    private fun setMapLongClick(map: GoogleMap) {
         map.setOnMapLongClickListener {
             val snippet = String.format(
-                    Locale.getDefault(),
-                    "Lat: %1$.5f, Long:%2$.5f",
-                    it.latitude,
-                    it.longitude
+                Locale.getDefault(),
+                "Lat: %1$.5f, Long:%2$.5f",
+                it.latitude,
+                it.longitude
             )
             map.addMarker(
-                    MarkerOptions()
-                            .position(it)
-                            .title("Insert this place")
-                            .snippet("Click here")
+                MarkerOptions()
+                    .position(it)
+                    .title("Insert this place")
+                    .snippet("Click here")
 
             )
 
-            val database = Firebase.database("https://spoton-8bebd-default-rtdb.europe-west1.firebasedatabase.app/")
+            val database =
+                Firebase.database("https://spoton-8bebd-default-rtdb.europe-west1.firebasedatabase.app/")
             val reference = database.reference
             val data = reference.push().child("location").setValue(it)
-
         }
-
-
-
     }
 
-    private fun setPoiClick(map:GoogleMap) {
+    private fun setPoiClick(map: GoogleMap) {
         map.setOnPoiClickListener {
             val poiMarker = map.addMarker(
-                    MarkerOptions()
-                            .position(it.latLng)
-                            .title(it.name)
-                            .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
+                MarkerOptions()
+                    .position(it.latLng)
+                    .title(it.name)
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE))
             )
             poiMarker.showInfoWindow()
 
-            val database = Firebase.database("https://spoton-8bebd-default-rtdb.europe-west1.firebasedatabase.app/")
+            val database =
+                Firebase.database("https://spoton-8bebd-default-rtdb.europe-west1.firebasedatabase.app/")
             val reference = database.reference
             val data = reference.push().child("location").setValue(it)
         }
     }
 
-    private fun isPermissionGranted() : Boolean {
+    private fun isPermissionGranted(): Boolean {
         return ContextCompat.checkSelfPermission(
-                this,
-                Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-
+            this,
+            Manifest.permission.ACCESS_FINE_LOCATION
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun enableMyLocation() {
         if (isPermissionGranted()) {
-            mMap.isMyLocationEnabled = true
-        }
-        else {
-            ActivityCompat.requestPermissions(
+            if (ActivityCompat.checkSelfPermission(
                     this,
-                    arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
-                    REQUEST_LOCATION_PERMISSION
+                    Manifest.permission.ACCESS_FINE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                ) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            mMap.isMyLocationEnabled = true
+        } else {
+            ActivityCompat.requestPermissions(
+                this,
+                arrayOf<String>(Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_LOCATION_PERMISSION
             )
         }
     }
 
     override fun onRequestPermissionsResult(
-            requestCode: Int,
-            permissions: Array<out String>,
-            grantResults: IntArray) {
-            if (requestCode == REQUEST_LOCATION_PERMISSION) {
-                if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
-                    enableMyLocation()
-            }
-
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.contains(PackageManager.PERMISSION_GRANTED))
+                enableMyLocation()
+        }
     }
-
 }
