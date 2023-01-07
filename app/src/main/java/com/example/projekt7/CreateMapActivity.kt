@@ -42,9 +42,7 @@ class CreateMapActivity : AppCompatActivity(), OnMapReadyCallback {
         mapFragment.getMapAsync(this)
 
         mapFragment.view?.let {
-            Snackbar.make(it, "Long press to add a marker!", Snackbar.LENGTH_INDEFINITE)
-                .setAction("Got it!", {})
-                .setActionTextColor(ContextCompat.getColor(this, android.R.color.white))
+            Snackbar.make(it, "Long press to add a marker!", Snackbar.LENGTH_SHORT)
                 .show()
         }
     }
